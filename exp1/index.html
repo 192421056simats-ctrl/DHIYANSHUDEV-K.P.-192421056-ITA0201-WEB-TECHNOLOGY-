@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 1: Basic HTML Web Page - Quantum Cryptography</title>
+  <link rel="stylesheet" href="../global.css">
+  <style>
+    .article-container {
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+    .math-box {
+      background: rgba(8, 13, 26, 0.6);
+      border: 1px dashed var(--border-focus);
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: 'Fira Code', monospace;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container fade-in">
+    <a href="../index.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Dashboard
+    </a>
+
+    <article class="article-container glass-panel">
+      <!-- Headings (h1, h2, h3) -->
+      <h1 class="title-glow" style="font-size: 2rem; margin-bottom: 0.5rem;">Quantum Cryptography in Smart Campuses</h1>
+      <h2 style="color: var(--accent-cyan); font-size: 1.25rem; font-weight: 500; margin-bottom: 1.5rem;">Next-Generation Wireless Network Security</h2>
+      
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">
+        Published by: <b>Apex Institute Research Wing</b> &bull; Last updated: <i>July 2026</i>
+      </p>
+
+      <!-- Horizontal Line (hr) -->
+      <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+
+      <!-- Paragraphs (p) and Line Breaks (br) -->
+      <p style="margin-bottom: 1rem;">
+        Modern smart campus networks face unprecedented security challenges due to the proliferation of IoT devices. 
+        Traditional encryption algorithms, such as RSA and ECC, are vulnerable to quantum computing attacks.<br>
+        To safeguard wireless transmissions, researchers are looking toward <u>Quantum Key Distribution (QKD)</u> protocols.
+      </p>
+
+      <h3 style="color: #fff; margin: 1.5rem 0 0.5rem 0; font-size: 1.1rem;">The BB84 Protocol Mechanism</h3>
+      <p style="margin-bottom: 1rem;">
+        The BB84 protocol, designed by Charles Bennett and Gilles Brassard in 1984, leverages the fundamental laws of quantum physics. 
+        When Alice transmits polarized photons to Bob, any eavesdropper (Eve) attempting to intercept the photons will inevitably alter their states, 
+        thereby triggering an alert in the security system.
+      </p>
+
+      <!-- Math Box showcasing Superscripts (sup) and Subscripts (sub) -->
+      <div class="math-box">
+        <p style="font-size: 0.95rem; color: var(--accent-blue);">
+          Key State Representation &amp; Complexity
+        </p>
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.05); margin: 0.5rem 0;">
+        <p style="margin-bottom: 0.5rem;">
+          Quantum State Complexity: <b>Ψ<sub>total</sub></b> = <b>α|0⟩<sub>Alice</sub></b> + <b>β|1⟩<sub>Bob</sub></b>
+        </p>
+        <p>
+          Probability space for an n-qubit key: <b>S = 2<sup>n</sup></b> combinations
+        </p>
+      </div>
+
+      <p style="margin-bottom: 1rem;">
+        By measuring the error rate of the sample qubits, Alice (represented as <b>A<sub>key</sub></b>) and Bob (represented as <b>B<sub>key</sub></b>) 
+        can calculate if the information has been intercepted. If the eavesdropping threshold is exceeded, the key is discarded 
+        and a new quantum channel is negotiated.
+      </p>
+
+      <h3 style="color: #fff; margin: 1.5rem 0 0.5rem 0; font-size: 1.1rem;">Summary of Security Benefits</h3>
+      <p style="margin-bottom: 1.5rem;">
+        1. <i>Absolute Eavesdropper Detection</i>: Physics-based detection guarantees intrusion discovery.<br>
+        2. <u>Forward Secrecy</u>: Compromise of current keys does not compromise past transmissions.<br>
+        3. <b>Future-Proof Security</b>: Resilient against mathematically advanced computational machines (e.g., 2<sup>128</sup> FLOP systems).
+      </p>
+
+      <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
+
+      <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted);">
+        Experiment 1 Checklist Validation: 
+        <h1>h1</h1>, <h2>h2</h2>, <h3>h3</h3> headings, 
+        <p>paragraph</p>, <br>line break, <hr>horizontal line, 
+        <b>bold text</b>, <i>italicized text</i>, <u>underlined text</u>, 
+        superscript (2<sup>n</sup>), and subscript (H<sub>2</sub>O) successfully verified.
+      </p>
+    </article>
+  </div>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submission Results - GET vs POST Demonstration</title>
+  <link rel="stylesheet" href="../global.css">
+  <style>
+    .result-card {
+      max-width: 750px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+    }
+    
+    .console-header {
+      background: #04070d;
+      border-radius: 8px 8px 0 0;
+      border: 1px solid var(--border-color);
+      border-bottom: none;
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .console-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .indicator-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .indicator-get .indicator-dot {
+      background-color: var(--accent-green);
+      box-shadow: var(--glow-green);
+    }
+
+    .indicator-post .indicator-dot {
+      background-color: var(--accent-blue);
+      box-shadow: var(--glow-blue);
+    }
+
+    .code-console {
+      background: #04070d;
+      border: 1px solid var(--border-color);
+      border-radius: 0 0 8px 8px;
+      padding: 1.5rem;
+      font-family: 'Fira Code', monospace;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    .param-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 0.5rem 0;
+    }
+
+    .param-key {
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+
+    .param-val {
+      color: var(--text-main);
+      word-break: break-all;
+    }
+
+    .url-display {
+      background: rgba(8, 13, 26, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      word-break: break-all;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container fade-in">
+    <a href="index.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Forms
+    </a>
+
+    <div class="glass-panel result-card">
+      <h1 class="title-glow" style="font-size: 1.8rem; margin-bottom: 1rem; text-align: center;">HTTP Form Submission Analysis</h1>
+      
+      <!-- HTTP Method Active Display -->
+      <div id="consoleHeader" class="console-header">
+        <div id="methodIndicator" class="console-indicator">
+          <div class="indicator-dot"></div>
+          <span id="methodName">HTTP METHOD</span>
+        </div>
+        <span style="color: var(--text-muted); font-size: 0.8rem;">HTTP Response Header: 200 OK</span>
+      </div>
+      
+      <div id="logConsole" class="code-console">Analyzing request headers...</div>
+
+      <!-- Address Bar Simulator -->
+      <h3 style="font-family: 'Outfit'; margin-bottom: 0.5rem; color: #fff;">Browser Address Bar State</h3>
+      <div id="addressBar" class="url-display">
+        Loading URL...
+      </div>
+
+      <!-- Parameter Details -->
+      <h3 style="font-family: 'Outfit'; margin-bottom: 0.5rem; color: #fff;">Parsed Payload Key-Values</h3>
+      <div id="parsedParams" class="glass-panel" style="padding: 1rem; margin-bottom: 2rem; background: rgba(8, 13, 26, 0.4);">
+        Loading keys...
+      </div>
+
+      <!-- Security Brief -->
+      <div class="glass-panel" style="border-color: rgba(139, 92, 246, 0.3); background: rgba(139, 92, 246, 0.03); padding: 1.25rem;">
+        <h4 style="color: var(--accent-purple); font-family: 'Outfit'; margin-bottom: 0.5rem;">Security &amp; Visibility Verdict</h4>
+        <p id="securityVerdict" style="font-size: 0.9rem; color: var(--text-muted);">
+          Analyzing vulnerability context...
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Parse parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      let method = urlParams.get('methodUsed') || '';
+      
+      // If method is not in URL, check if stored in sessionStorage (POST indicator)
+      if (!method && sessionStorage.getItem('post_submitted') === 'true') {
+        method = 'POST';
+      }
+
+      const consoleHeader = document.getElementById('consoleHeader');
+      const methodName = document.getElementById('methodName');
+      const logConsole = document.getElementById('logConsole');
+      const addressBar = document.getElementById('addressBar');
+      const parsedParams = document.getElementById('parsedParams');
+      const securityVerdict = document.getElementById('securityVerdict');
+
+      // Sync simulated URL display
+      addressBar.innerHTML = `<span style="color: var(--text-muted);">${window.location.origin}</span>${window.location.pathname}${window.location.search}`;
+
+      if (method === 'GET') {
+        // Setup GET styling
+        consoleHeader.className = "console-header indicator-get";
+        methodName.innerText = "HTTP GET REQUEST (SUCCESSFUL)";
+        
+        // Extract parameters
+        const query = urlParams.get('searchQuery') || 'N/A';
+        const cat = urlParams.get('category') || 'N/A';
+        const limit = urlParams.get('resultsLimit') || 'N/A';
+
+        // Render console raw format
+        logConsole.innerHTML = `
+<span class="comment">// Browser generated raw request headers:</span>
+GET ${window.location.pathname}${window.location.search} HTTP/1.1
+Host: ${window.location.host}
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64) Chrome/120.0
+Accept: text/html,application/xhtml+xml
+Referer: ${window.location.origin}/exp5/index.html
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+        `.trim();
+
+        // Render Key Values
+        parsedParams.innerHTML = `
+          <div class="param-row"><span class="param-key">methodUsed</span><span class="param-val">GET</span></div>
+          <div class="param-row"><span class="param-key">searchQuery</span><span class="param-val">${escapeHtml(query)}</span></div>
+          <div class="param-row"><span class="param-key">category</span><span class="param-val">${escapeHtml(cat)}</span></div>
+          <div class="param-row"><span class="param-key">resultsLimit</span><span class="param-val">${escapeHtml(limit)}</span></div>
+        `;
+
+        securityVerdict.innerHTML = `
+          <b>Visibility: HIGHLY VISIBLE.</b> All parameters are serialised inside the URL query string.<br><br>
+          <b>Security Vulnerability:</b> Because parameters are in the URL, sensitive data like passwords, OTPs, or API tokens would be saved in the browser history, web server access logs (e.g. Apache/Nginx access.log), and proxy server logs. 
+          Additionally, this page is bookmarkable, which is perfect for search queries, but dangerous for secure operations.
+        `;
+
+      } else if (method === 'POST') {
+        // Setup POST styling
+        consoleHeader.className = "console-header indicator-post";
+        methodName.innerText = "HTTP POST REQUEST (SUCCESSFUL)";
+
+        // Read stored POST data
+        const username = sessionStorage.getItem('post_adminUser') || 'N/A';
+        const pass = sessionStorage.getItem('post_adminPass') || 'N/A';
+        const command = sessionStorage.getItem('post_actionSetting') || 'N/A';
+
+        // Anonymise password characters for show
+        const maskedPass = '*'.repeat(Math.max(pass.length, 6));
+
+        // Render console raw format showing body parameters
+        logConsole.innerHTML = `
+<span class="comment">// Browser generated raw request headers:</span>
+POST ${window.location.pathname} HTTP/1.1
+Host: ${window.location.host}
+Content-Type: application/x-www-form-urlencoded
+Content-Length: ${42 + username.length + pass.length + command.length}
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64)
+Referer: ${window.location.origin}/exp5/index.html
+
+<span class="comment">// HTTP Request Body Payload (Separate from Headers):</span>
+<span style="color: var(--accent-cyan);">methodUsed</span>=POST&amp;<span style="color: var(--accent-cyan);">adminUser</span>=${encodeURIComponent(username)}&amp;<span style="color: var(--accent-cyan);">adminPass</span>=${encodeURIComponent(pass)}&amp;<span style="color: var(--accent-cyan);">actionSetting</span>=${encodeURIComponent(command)}
+        `.trim();
+
+        // Render Key Values
+        parsedParams.innerHTML = `
+          <div class="param-row"><span class="param-key">methodUsed</span><span class="param-val">POST</span></div>
+          <div class="param-row"><span class="param-key">adminUser</span><span class="param-val">${escapeHtml(username)}</span></div>
+          <div class="param-row"><span class="param-key">adminPass</span><span class="param-val">${escapeHtml(maskedPass)} (Masked in View; Transmitted as plain body: "${escapeHtml(pass)}")</span></div>
+          <div class="param-row"><span class="param-key">actionSetting</span><span class="param-val">${escapeHtml(command)}</span></div>
+        `;
+
+        securityVerdict.innerHTML = `
+          <b>Visibility: HIDDEN FROM URL.</b> The browser address bar remains clean: <code>${window.location.origin}${window.location.pathname}</code>.<br><br>
+          <b>Security Verdict:</b> Parameters are sent in the HTTP request body payload. This means sensitive parameters like passwords and commands are NOT logged in standard proxy or server logs, nor saved in browser history. 
+          <i>Note:</i> POST parameters are still transmitted in plaintext unless wrapped in an SSL/TLS layer (HTTPS).
+        `;
+
+      } else {
+        // Fallback or missing parameters
+        logConsole.innerText = "No request captured. Please submit one of the forms on the previous page.";
+        parsedParams.innerText = "No values detected.";
+        securityVerdict.innerText = "Navigate back and submit one of the forms.";
+      }
+    });
+
+    function escapeHtml(unsafe) {
+      return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>

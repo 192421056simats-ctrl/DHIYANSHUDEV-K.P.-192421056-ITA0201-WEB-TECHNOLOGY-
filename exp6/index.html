@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Exp 6: XHTML-Compliant Web Page</title>
+  <link rel="stylesheet" href="../global.css" />
+  <style type="text/css">
+    .xhtml-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+    }
+    
+    .rule-card {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      background: rgba(8, 13, 26, 0.4);
+      transition: border-color var(--transition-fast);
+    }
+
+    .rule-card:hover {
+      border-color: var(--accent-purple);
+    }
+
+    .rule-title {
+      font-size: 1rem;
+      color: var(--accent-cyan);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .rule-status {
+      font-weight: 700;
+      color: var(--accent-green);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .highlight-snippet {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      background: #04070d;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 4px;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      display: block;
+      color: #94a3b8;
+    }
+
+    .emphasis-text {
+      color: #fff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="back-link">
+      &#8592; Back to Dashboard
+    </a>
+
+    <div class="glass-panel xhtml-container">
+      <h1 class="title-glow" style="font-size: 1.8rem; margin-bottom: 0.5rem; text-align: center;">Strict XHTML Compliance</h1>
+      <p class="sub-title" style="text-align: center; margin-bottom: 2rem;">
+        This document adheres strictly to the XHTML 1.0 Strict specification.
+      </p>
+
+      <h2 style="color: #fff; font-size: 1.3rem; margin-bottom: 1rem; font-family: 'Outfit';">XHTML Rule Verification Checklist</h2>
+
+      <!-- Rule 1: Lowercase Tags -->
+      <div class="rule-card">
+        <div class="rule-title">
+          <span>Rule 1: Element Names Must Be Lowercase</span>
+          <span class="rule-status">✔ Active</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          In HTML, tag names are case-insensitive (e.g. &lt;DIV&gt; works). In XHTML, tags must be in lowercase.
+        </p>
+        <code class="highlight-snippet">&lt;html&gt;, &lt;head&gt;, &lt;body&gt;, &lt;div&gt;, &lt;p&gt;, &lt;span&gt;</code>
+      </div>
+
+      <!-- Rule 2: Closed Elements -->
+      <div class="rule-card">
+        <div class="rule-title">
+          <span>Rule 2: All Elements Must Be Closed</span>
+          <span class="rule-status">✔ Active</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          In HTML, some elements do not require closing tags (e.g. paragraphs). In XHTML, every element must have a closing tag.
+        </p>
+        <code class="highlight-snippet">&lt;p&gt;This is a paragraph.&lt;/p&gt;</code>
+      </div>
+
+      <!-- Rule 3: Self-Closing Empty Tags -->
+      <div class="rule-card">
+        <div class="rule-title">
+          <span>Rule 3: Empty Elements Must Be Self-Closed</span>
+          <span class="rule-status">✔ Active</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Empty tags like line breaks or horizontal lines must be self-closed with a space and a slash.
+        </p>
+        <code class="highlight-snippet">&lt;br /&gt; and &lt;hr /&gt; and &lt;img src="..." alt="..." /&gt;</code>
+        <!-- Testing rendering here: -->
+        <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1rem 0;" />
+        <p style="font-size: 0.9rem;">
+          The horizontal rule above represents a self-closing empty tag: <span class="emphasis-text">&lt;hr /&gt;</span>.
+        </p>
+      </div>
+
+      <!-- Rule 4: Quoted Attributes -->
+      <div class="rule-card">
+        <div class="rule-title">
+          <span>Rule 4: Attribute Values Must Be Quoted</span>
+          <span class="rule-status">✔ Active</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          All attribute values must be enclosed in quotation marks. Unquoted values (e.g. class=rule-card) are illegal in XHTML.
+        </p>
+        <code class="highlight-snippet">class="rule-card" style="color: var(--text-muted);"</code>
+      </div>
+
+      <!-- Rule 5: Proper Nesting -->
+      <div class="rule-card">
+        <div class="rule-title">
+          <span>Rule 5: Elements Must Be Properly Nested</span>
+          <span class="rule-status">✔ Active</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Tags must be closed in the reverse order they were opened. Nested overlaps like &lt;b&gt;&lt;i&gt;bold italic&lt;/b&gt;&lt;/i&gt; are invalid.
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.95rem;">
+          Example of valid nesting: <span class="emphasis-text"><i><u>underlined italicized text</u></i></span>.
+        </p>
+        <code class="highlight-snippet">&lt;i&gt;&lt;u&gt;underlined italicized text&lt;/u&gt;&lt;/i&gt;</code>
+      </div>
+      
+      <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 2rem;">
+        This page was served with strict <code>xmlns="http://www.w3.org/1999/xhtml"</code>. 
+        Mime-type validation is validated in the DOM via lowercase nodes.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

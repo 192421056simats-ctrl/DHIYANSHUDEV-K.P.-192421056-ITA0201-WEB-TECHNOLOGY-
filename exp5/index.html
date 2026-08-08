@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 5: GET vs POST Methods Demo</title>
+  <link rel="stylesheet" href="../global.css">
+  <style>
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .form-box {
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem;
+      background: rgba(13, 22, 43, 0.35);
+      position: relative;
+    }
+
+    .method-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    .badge-get {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-post {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--accent-blue);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .explainer-card {
+      background: rgba(139, 92, 246, 0.05);
+      border-left: 4px solid var(--accent-purple);
+      padding: 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .split-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container fade-in">
+    <a href="../index.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Dashboard
+    </a>
+
+    <!-- Header Banner -->
+    <header class="header-banner">
+      <div>
+        <h1 class="title-glow" style="font-size: 1.8rem;">GET and POST Submission Demonstrator</h1>
+        <p class="sub-title">Experimentally observe parameter serialization and transmission security differences.</p>
+      </div>
+    </header>
+
+    <!-- Explainer box -->
+    <section class="glass-panel explainer-card">
+      <h3 style="color: #fff; margin-bottom: 0.5rem; font-family: 'Outfit';">Observational Objectives</h3>
+      <p style="font-size: 0.95rem; color: var(--text-muted);">
+        When you click submit on each form below, you will be redirected to the landing page. Check the following:
+      </p>
+      <ul style="margin-left: 1.5rem; margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">
+        <li><b>URL Query String:</b> Notice that the <b>GET</b> form appends form parameters to the URL bar (e.g., <code>?query=val&amp;limit=10</code>), whereas the <b>POST</b> form url remains clean.</li>
+        <li><b>Payload Volume &amp; Type:</b> GET is limited by URL character length (~2048 chars) and allows binary data only via base64 encoding. POST supports large, multi-part file uploads.</li>
+        <li><b>Security/Caching:</b> GET forms can be bookmarked and cached, exposing parameters in browser history. POST submissions do not cache parameters and will prompt warning alerts on page refresh.</li>
+      </ul>
+    </section>
+
+    <!-- Side-by-side forms -->
+    <div class="split-layout">
+      <!-- GET Form -->
+      <article class="form-box">
+        <span class="method-badge badge-get">HTTP GET</span>
+        <h2 style="color: #fff; font-size: 1.3rem; margin-bottom: 0.5rem; font-family: 'Outfit';">Search Library Database</h2>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Ideal for idempotent read operations, filter configurations, and shareable searches.</p>
+        
+        <form action="submit.html" method="GET">
+          <!-- Hidden parameter to tell submit.html which form sent it -->
+          <input type="hidden" name="methodUsed" value="GET">
+          
+          <div class="form-group">
+            <label for="searchQuery">Search Keywords</label>
+            <input type="text" id="searchQuery" name="searchQuery" placeholder="e.g. Wireless WPA3 Security" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="category">Category Filter</label>
+            <select id="category" name="category">
+              <option value="Research Papers">Research Papers</option>
+              <option value="Lab Manuals">Lab Manuals</option>
+              <option value="Books">Books</option>
+              <option value="RFC Documentation">RFC Documentation</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="resultsLimit">Results Limit</label>
+            <select id="resultsLimit" name="resultsLimit">
+              <option value="10">10 Records</option>
+              <option value="25">25 Records</option>
+              <option value="50">50 Records</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+            Submit GET Request
+          </button>
+        </form>
+      </article>
+
+      <!-- POST Form -->
+      <article class="form-box">
+        <span class="method-badge badge-post">HTTP POST</span>
+        <h2 style="color: #fff; font-size: 1.3rem; margin-bottom: 0.5rem; font-family: 'Outfit';">Update Security Settings</h2>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Ideal for sensitive state-altering actions, uploads, updates, or account operations.</p>
+        
+        <form action="submit.html" method="POST" onsubmit="handlePostSubmit(event)">
+          <!-- Hidden parameter to tell submit.html which method is active -->
+          <input type="hidden" name="methodUsed" value="POST">
+          
+          <div class="form-group">
+            <label for="adminUser">Administrator Username</label>
+            <input type="text" id="adminUser" name="adminUser" placeholder="e.g. admin_security" required>
+          </div>
+
+          <div class="form-group">
+            <label for="adminPass">Security Access Password</label>
+            <input type="password" id="adminPass" name="adminPass" placeholder="Enter password (POST masks this in body)" required>
+          </div>
+
+          <div class="form-group">
+            <label for="actionSetting">Action Command</label>
+            <select id="actionSetting" name="actionSetting">
+              <option value="Flush Rogue AP Logs">Flush Rogue AP Logs</option>
+              <option value="Reset WPA3 Core Encryption Keys">Reset WPA3 Core Encryption Keys</option>
+              <option value="Toggle Intrusion Detection System">Toggle Intrusion Detection System</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); box-shadow: var(--glow-cyan);">
+            Submit POST Request
+          </button>
+        </form>
+      </article>
+    </div>
+  </div>
+
+  <script>
+    function handlePostSubmit(event) {
+      event.preventDefault(); // Intercept actual submission to avoid static host 405 error
+      
+      // Clear old state
+      sessionStorage.clear();
+      
+      const adminUser = document.getElementById('adminUser').value;
+      const adminPass = document.getElementById('adminPass').value;
+      const actionSetting = document.getElementById('actionSetting').value;
+      
+      // Save data to simulate POST request body payload reading
+      sessionStorage.setItem('post_submitted', 'true');
+      sessionStorage.setItem('post_adminUser', adminUser);
+      sessionStorage.setItem('post_adminPass', adminPass);
+      sessionStorage.setItem('post_actionSetting', actionSetting);
+      
+      // Redirect to the landing page
+      window.location.href = 'submit.html';
+    }
+  </script>
+</body>
+</html>

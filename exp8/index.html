@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 8: Images, Links, and Iframes Explorer</title>
+  <link rel="stylesheet" href="../global.css">
+  <style>
+    .explorer-card {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+    }
+
+    .split-layout {
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 2rem;
+    }
+
+    .image-preview-box {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      background: rgba(8, 13, 26, 0.4);
+      text-align: center;
+    }
+
+    .image-caption {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+    }
+
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .iframe-box {
+      background: rgba(8, 13, 26, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .iframe-header {
+      background: rgba(13, 22, 43, 0.8);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .split-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container fade-in">
+    <a href="../index.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Dashboard
+    </a>
+
+    <!-- Header -->
+    <header class="header-banner">
+      <div>
+        <h1 class="title-glow" style="font-size: 1.8rem;">Images, Hyperlinks, &amp; Iframes</h1>
+        <p class="sub-title">Experiment 8: Embedded frames, layout sizing, and target hyperlinking mechanisms.</p>
+      </div>
+    </header>
+
+    <div class="glass-panel explorer-card">
+      <div class="split-layout">
+        
+        <!-- Left Side: Image and Link Targets -->
+        <div>
+          <h3 style="color: #fff; font-family: 'Outfit'; margin-bottom: 1rem;">Asset Rendering &amp; Anchor Targets</h3>
+          
+          <!-- Image Tag with width, height, and alt text -->
+          <div class="image-preview-box">
+            <svg width="200" height="140" viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius: 4px; background: #030712; border: 1px solid rgba(255,255,255,0.05);">
+              <circle cx="100" cy="70" r="50" fill="url(#grad)" fill-opacity="0.1" stroke="url(#grad)" stroke-width="1" />
+              <circle cx="100" cy="70" r="30" fill="url(#grad)" fill-opacity="0.1" stroke="url(#grad)" stroke-width="1.5" />
+              <circle cx="100" cy="70" r="10" fill="#3b82f6" />
+              <!-- Lock Symbol -->
+              <rect x="92" y="65" width="16" height="12" rx="2" fill="#8b5cf6" />
+              <path d="M95 65V60C95 57.2386 97.2386 55 100 55C102.761 55 105 57.2386 105 60V65" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" />
+              <defs>
+                <linearGradient id="grad" x1="0" y1="0" x2="200" y2="140" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#06b6d4" />
+                  <stop offset="1" stop-color="#8b5cf6" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <p class="image-caption">Figure 8.1: Campus Wireless Shield Graphic (Vector Embedded SVG)</p>
+          </div>
+
+          <div style="margin-top: 1.5rem;">
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+              Click links below to update the nested iframe contents:
+            </p>
+            
+            <div class="link-list">
+              <!-- Anchors pointing to the iframe named "preview_frame" -->
+              <a href="embed_target.html" target="preview_frame" class="btn btn-secondary" style="justify-content: flex-start;">
+                Load: Campus Regulations
+              </a>
+              <a href="../exp1/index.html" target="preview_frame" class="btn btn-secondary" style="justify-content: flex-start;">
+                Load: Exp 1 (Quantum Crypto)
+              </a>
+              <a href="../exp2/index.html" target="preview_frame" class="btn btn-secondary" style="justify-content: flex-start;">
+                Load: Exp 2 (Student Profile)
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Iframe Viewer -->
+        <div class="iframe-box">
+          <div class="iframe-header">
+            <span>Embedded Viewport: <code>&lt;iframe name="preview_frame"&gt;</code></span>
+            <span class="badge badge-purple" style="font-size: 0.65rem;">Sandbox Safe</span>
+          </div>
+          
+          <!-- Iframe element with source, width, height, and border properties -->
+          <iframe 
+            name="preview_frame" 
+            src="embed_target.html" 
+            width="100%" 
+            height="420" 
+            style="border: none; background: #030712;"
+            title="Interactive Experiment Iframe Target Viewer">
+          </iframe>
+        </div>
+
+      </div>
+
+      <!-- Security Notice -->
+      <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 2rem 0;">
+      <div style="font-size: 0.85rem; color: var(--text-muted);">
+        <h4 style="color: var(--accent-cyan); font-family: 'Outfit'; margin-bottom: 0.5rem;">Security Insights: X-Frame-Options &amp; Clickjacking</h4>
+        <p>
+          Many external public servers send the <code>X-Frame-Options: DENY</code> or <code>SAMEORIGIN</code> response header to prevent clickjacking attacks. 
+          When a page attempts to embed these sites, the browser blocks the rendering to protect users. For this lab experiment, we target local sub-resources to show iframe targeting safely.
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

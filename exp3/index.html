@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 3: Class Timetable - B.Tech CSE Semester IV</title>
+  <link rel="stylesheet" href="../global.css">
+  <style>
+    .table-container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      overflow-x: auto;
+    }
+
+    /* Timetable Modern CSS Styling Overrides */
+    .timetable {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(13, 22, 43, 0.45);
+      border-color: rgba(99, 140, 243, 0.2) !important;
+      color: var(--text-main);
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .timetable caption {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 1rem;
+      caption-side: top;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .timetable th {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--accent-cyan);
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid rgba(99, 140, 243, 0.2);
+    }
+
+    .timetable td {
+      border: 1px solid rgba(99, 140, 243, 0.2);
+      font-size: 0.9rem;
+      transition: background var(--transition-fast);
+    }
+
+    .timetable tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Subject Types */
+    .subject-cse {
+      background: rgba(59, 130, 246, 0.1);
+      color: #93c5fd;
+      border-left: 3px solid var(--accent-blue) !important;
+    }
+
+    .subject-math {
+      background: rgba(139, 92, 246, 0.1);
+      color: #c084fc;
+      border-left: 3px solid var(--accent-purple) !important;
+    }
+
+    .subject-lab {
+      background: rgba(6, 182, 212, 0.1);
+      color: #67e8f9;
+      border-left: 3px solid var(--accent-cyan) !important;
+      font-weight: 600;
+    }
+
+    .recess {
+      background: rgba(16, 185, 129, 0.08) !important;
+      color: var(--accent-green);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .free {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container fade-in">
+    <a href="../index.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Dashboard
+    </a>
+
+    <div class="glass-panel table-container">
+      <!-- HTML Table with required old-school attributes, enhanced with modern CSS -->
+      <table class="timetable" border="1" cellpadding="12" cellspacing="0">
+        <caption>
+          DEPARTMENT OF COMPUTER SCIENCE &amp; ENGINEERING
+          <br><span style="font-size: 0.95rem; font-weight: normal; color: var(--text-muted);">Semester IV - Class Timetable</span>
+        </caption>
+        
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>09:00 - 10:00</th>
+            <th>10:00 - 11:00</th>
+            <th>11:00 - 12:00</th>
+            <th>12:00 - 01:00</th>
+            <th>01:00 - 02:00</th>
+            <th>02:00 - 03:00</th>
+            <th>03:00 - 04:00</th>
+            <th>04:00 - 05:00</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <!-- Monday -->
+          <tr>
+            <th>Monday</th>
+            <td class="subject-math">Applied Math-IV</td>
+            <td class="subject-cse">Database Systems</td>
+            <td class="subject-cse">Operating Systems</td>
+            <td class="subject-cse">Computer Networks</td>
+            <!-- Recess colspan spans Monday through Friday (so colspan="1" is standard, but the Recess block covers this 1:00-2:00 column) -->
+            <!-- Note: Since we want RECESS to span multiple columns, wait! Colspan spans columns horizontally, Rowspan spans rows vertically. -->
+            <!-- If we want lunch break to be listed in a single row spanning ALL days, wait, let's see. If rows are Days and columns are Hours, then a single lunch period for that day spans just that 1-2 PM column. Oh, so no colspan is needed for lunch? No! Wait! -->
+            <!-- If the columns are Days (Mon, Tue, Wed...) and the rows are Hours, then a lunch row (1-2 PM) will span all columns (Mon, Tue, Wed, Thu, Fri) using colspan! -->
+            <!-- Let's check our design: the columns are Hours, and the rows are Days. In this structure, Monday has a Lunch cell at 1:00-2:00. Tuesday has one. Wednesday has one. -->
+            <!-- What if we have a seminar spanning 2 columns? Yes! A seminar from 2:00 PM to 4:00 PM can use colspan="2". -->
+            <!-- Let's map a Seminar on Monday that spans 2 columns (02:00 - 04:00) using colspan="2". -->
+            <!-- And let's use rowspan to represent Monday's Lab and Tuesday's Lab spanning multiple rows if we had days as columns. -->
+            <!-- Wait! If Monday's lab is 2 hours, it's 2 columns (colspan="2"). If we want a subject to span multiple DAYS at the same hour, we can use rowspan! -->
+            <!-- For example: "Wireless Security Seminar" at 4:00-5:00 PM on Monday and Tuesday. Alice/Bob can have a rowspan="2" on Monday's 4:00-5:00 cell, and Tuesday's 4:00-5:00 cell will be omitted! -->
+            <!-- This is perfect! Let's implement that! -->
+            <td class="recess">LUNCH</td>
+            <td class="subject-lab" colspan="2">Network Security Lab (Mon/Tue)</td>
+            <!-- Rowspan="2" on Monday 4-5 PM to cover Tuesday as well -->
+            <td class="subject-cse" rowspan="2">Seminar: InfoSec</td>
+          </tr>
+          
+          <!-- Tuesday -->
+          <tr>
+            <th>Tuesday</th>
+            <td class="subject-cse">Computer Networks</td>
+            <td class="subject-cse">Operating Systems</td>
+            <td class="subject-math">Applied Math-IV</td>
+            <td class="free">Library Hour</td>
+            <td class="recess">LUNCH</td>
+            <!-- Since Network Security Lab is two-hour class on Mon/Tue, we do colspan="2" here too -->
+            <td class="subject-lab" colspan="2">Network Security Lab (Mon/Tue)</td>
+            <!-- Tuesday 4-5 PM cell is omitted because Monday's Seminar rowspanned into it! -->
+          </tr>
+
+          <!-- Wednesday -->
+          <tr>
+            <th>Wednesday</th>
+            <td class="subject-cse">Database Systems</td>
+            <td class="subject-math">Applied Math-IV</td>
+            <td class="subject-cse">Web Technologies</td>
+            <td class="subject-cse">Operating Systems</td>
+            <td class="recess">LUNCH</td>
+            <td class="subject-cse">Computer Networks</td>
+            <td class="subject-cse">Database Systems</td>
+            <td class="free">Mentor Meet</td>
+          </tr>
+
+          <!-- Thursday -->
+          <tr>
+            <th>Thursday</th>
+            <td class="subject-cse">Web Technologies</td>
+            <td class="subject-cse">Operating Systems</td>
+            <td class="subject-cse">Computer Networks</td>
+            <td class="subject-cse">Database Systems</td>
+            <td class="recess">LUNCH</td>
+            <!-- Lab spanning 3 hours: 2:00 PM to 5:00 PM (colspan="3") -->
+            <td class="subject-lab" colspan="3">Web Technologies Lab (Thurs)</td>
+          </tr>
+
+          <!-- Friday -->
+          <tr>
+            <th>Friday</th>
+            <td class="subject-cse">Operating Systems</td>
+            <td class="subject-cse">Web Technologies</td>
+            <td class="subject-math">Applied Math-IV</td>
+            <td class="free">Placement Cell</td>
+            <td class="recess">LUNCH</td>
+            <td class="subject-cse">Database Systems</td>
+            <td class="free">Sports / Club</td>
+            <td class="free">Free Hour</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div style="max-width: 1000px; margin: 1.5rem auto; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+      <p>
+        Note: The table is constructed using valid <code>rowspan</code> (Seminar on Mon/Tue) and <code>colspan</code> (Labs on Mon/Tue/Thurs) attributes. 
+        Traditional table attributes <code>border="1"</code>, <code>cellpadding="12"</code>, and <code>cellspacing="0"</code> are specified to fulfill requirements.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

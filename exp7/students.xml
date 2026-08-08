@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<students>
+  <student>
+    <rollNumber>CSE-2024-001</rollNumber>
+    <name>Alice Cooper</name>
+    <department>Computer Science &amp; Engineering</department>
+    <year>2nd Year</year>
+    <email>alice.cooper@campus.edu</email>
+    <mobileNumber>+1-555-0192</mobileNumber>
+  </student>
+  <student>
+    <rollNumber>CSE-2024-002</rollNumber>
+    <name>Bob Marley</name>
+    <department>Computer Science &amp; Engineering</department>
+    <year>2nd Year</year>
+    <email>bob.marley@campus.edu</email>
+    <mobileNumber>+1-555-0143</mobileNumber>
+  </student>
+  <student>
+    <rollNumber>ECE-2024-015</rollNumber>
+    <name>Charlie Puth</name>
+    <department>Electronics &amp; Communication</department>
+    <year>3rd Year</year>
+    <email>charlie.puth@campus.edu</email>
+    <mobileNumber>+1-555-0155</mobileNumber>
+  </student>
+  <student>
+    <rollNumber>IT-2023-009</rollNumber>
+    <name>David Miller</name>
+    <department>Information Technology</department>
+    <year>4th Year</year>
+    <email>david.miller@campus.edu</email>
+    <mobileNumber>+1-555-0182</mobileNumber>
+  </student>
+  <student>
+    <rollNumber>CSE-2025-055</rollNumber>
+    <name>Eva Longoria</name>
+    <department>Computer Science &amp; Engineering</department>
+    <year>1st Year</year>
+    <email>eva.longoria@campus.edu</email>
+    <mobileNumber>+1-555-0104</mobileNumber>
+  </student>
+</students>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 2: Student Profile Page - Academic Portfolio</title>
+  <link rel="stylesheet" href="../global.css">
+  <style>
+    .profile-card {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+    }
+    
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: 800;
+      color: white;
+      box-shadow: var(--glow-blue);
+      border: 3px solid rgba(255,255,255,0.1);
+    }
+
+    .profile-info {
+      flex: 1;
+    }
+
+    .profile-title {
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+
+    .section-title {
+      color: var(--accent-cyan);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin: 2rem 0 1rem 0;
+      font-size: 1.3rem;
+    }
+
+    /* Lists styling overrides for alignment */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Description list styling */
+    dl {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    dt {
+      font-weight: 600;
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
+    }
+
+    dd {
+      color: var(--text-muted);
+      margin-left: 0;
+    }
+
+    @media (max-width: 600px) {
+      dl {
+        grid-template-columns: 1fr;
+      }
+      .profile-header {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container fade-in">
+    <a href="../index.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Dashboard
+    </a>
+
+    <div class="glass-panel profile-card">
+      <header class="profile-header">
+        <div class="avatar">DFF</div>
+        <div class="profile-info">
+          <h1 class="profile-title">DHIYANSHU DEV K.P.</h1>
+          <p style="color: var(--accent-blue); font-weight: 500; font-family: 'Outfit';">B.Tech in Computer Science &amp; Engineering</p>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Roll No: 192421056 &bull; Specialization: prompt enginner</p>
+          <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+            <a href="https://github.com" class="btn btn-secondary btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;" target="_blank">GitHub Profile</a>
+            <a href="mailto:192421056.simats@saveetha.com" class="btn btn-secondary btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">Email Contact</a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Description List (dl, dt, dd) -->
+      <h2 class="section-title">Personal Summary &amp; Contact Information</h2>
+      <dl>
+        <dt>Academic Department</dt>
+        <dd>Department of Computer Science &amp; Information Security</dd>
+        
+        <dt>Institutional Email</dt>
+        <dd><a href="mailto:192421056.simats@saveetha.com" style="color: var(--accent-blue); text-decoration: none;">192421056.simats@saveetha.com</a></dd>
+        
+        <dt>Github Handle</dt>
+        <dd><a href="https://github.com" style="color: var(--accent-blue); text-decoration: none;" target="_blank">github.com/dhiyanshu dev k.p.</a></dd>
+        
+        <dt>Research Interests</dt>
+        <dd>Wireless Network Security, Cryptographic Protocols, Smart Campus IoT Protections</dd>
+      </dl>
+
+      <!-- Ordered List (ol) -->
+      <h2 class="section-title">Educational Profile</h2>
+      <ol>
+        <li>
+          <strong>Bachelor of Technology (IT)</strong> - SIMATS ENGINEERING (2024 - Present)
+          <br><small style="color: var(--text-muted)">Current CGPA: 9.0 / 10.0</small>
+        </li>
+        <li>
+          <strong>Senior Secondary School Certificate</strong> - S.B.O.A MAT HER SEC SCHOOL (2022 - 2024)
+          <br><small style="color: var(--text-muted)">Major: Physics, Chemistry, Mathematics (Score: 75.0%)</small>
+        </li>
+        <li>
+          <strong>Secondary School Certificate</strong> - S.B.O.A MAT HER SEC SCHOOL(2011-2022)
+          <br><small style="color: var(--text-muted)">Cumulative Grade: 80..1%</small>
+        </li>
+      </ol>
+
+      <!-- Unordered List (ul) & Nested Lists -->
+      <h2 class="section-title">Technical Expertise</h2>
+      <ul>
+        <li>
+          <strong>Programming Languages</strong>
+          <!-- Nested Unordered List -->
+          <ul style="list-style-type: circle; margin-top: 0.25rem;">
+            <li>Python (Advanced)</li>
+            <li>JavaScript / TypeScript (ES6+)</li>
+            <li>C++ (Data Structures)</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Web Technologies</strong>
+          <!-- Nested Unordered List -->
+          <ul style="list-style-type: circle; margin-top: 0.25rem;">
+            <li>HTML5 / XHTML / CSS3</li>
+            <li>React.js / Next.js</li>
+            <li>Node.js / Express Backend REST APIs</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Security Tools &amp; Hardware</strong>
+          <!-- Nested Unordered List -->
+          <ul style="list-style-type: circle; margin-top: 0.25rem;">
+            <li>Wireshark (Packet Analysis)</li>
+            <li>SDR (Software Defined Radio) Monitoring</li>
+            <li>Metasploit &amp; Nmap Vulnerability Scanning</li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Description List (dl, dt, dd) for Academic Projects -->
+      <h2 class="section-title">Key Projects Showcase</h2>
+      <dl>
+        <dt>Wireless Smart Campus Analyzer</dt>
+        <dd>Built a React dashboard analyzing Wi-Fi signal strengths and detecting rogue Access Points (AP) on campus network.</dd>
+        
+        <dt>Quantum Cryptography BB84 Simulation</dt>
+        <dd>Developed a Python-based visualizer simulating photon polarization transmission between Alice and Bob, computing QBER (Quantum Bit Error Rate).</dd>
+        
+        <dt>Secure OTP Email Server</dt>
+        <dd>Configured a Node.js SMTP application sending cryptographically hashed OTP links to institutional email clients.</dd>
+      </dl>
+    </div>
+  </div>
+</body>
+</html>

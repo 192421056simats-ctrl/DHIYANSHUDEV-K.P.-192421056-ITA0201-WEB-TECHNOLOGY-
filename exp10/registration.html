@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Institute of Science & Technology - Admissions Inquiry</title>
+  <link rel="stylesheet" href="college.css">
+  <style>
+    .form-box {
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 2.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Global Navigation Header -->
+  <header class="college-header">
+    <div class="header-container">
+      <a href="index.html" class="logo-link">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-blue);"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg>
+        <span class="logo-text">APEX INSTITUTE</span>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="courses.html" class="nav-link">Courses</a>
+        <a href="registration.html" class="nav-link active">Registration</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div>
+        <a href="../index.html" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">Exit Lab Site</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="college-main fade-in">
+    <h1 class="page-title">Admission &amp; Inquiry Registration</h1>
+    
+    <div class="glass-panel form-box">
+      <h2 style="color: #fff; font-family: 'Outfit'; margin-bottom: 0.5rem; font-size: 1.5rem; text-align: center;">Inquiry Registration Form</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center; margin-bottom: 2rem;">
+        Fill out this form to request syllabus booklets and admission schedules from the admissions committee.
+      </p>
+
+      <!-- Form element representing College Admissions Inquiry -->
+      <form id="inquiryForm" onsubmit="submitInquiry(event)" onreset="resetInquiry()">
+        
+        <div class="form-group">
+          <label for="studentName">Applicant Full Name</label>
+          <input type="text" id="studentName" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="studentEmail">Email Address</label>
+            <input type="email" id="studentEmail" placeholder="e.g. name@domain.com" required>
+          </div>
+          <div class="form-group">
+            <label for="studentMobile">Mobile Phone Number</label>
+            <input type="text" id="studentMobile" placeholder="e.g. +1 555-0100" required>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="targetCourse">Program of Interest</label>
+            <select id="targetCourse" required>
+              <option value="" disabled selected>Select Program</option>
+              <option value="B.Tech Computer Science">B.Tech Computer Science</option>
+              <option value="B.Tech Information Technology">B.Tech Information Technology</option>
+              <option value="B.Tech Electronics & Comm.">B.Tech Electronics &amp; Comm.</option>
+              <option value="M.Tech Wireless Security">M.Tech Wireless Security</option>
+              <option value="M.Tech Data Science">M.Tech Data Science</option>
+              <option value="Ph.D. Cyber Security">Ph.D. Cyber Security</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="entryYear">Expected Enrollment Year</label>
+            <select id="entryYear" required>
+              <option value="Autumn 2026" selected>Autumn 2026</option>
+              <option value="Spring 2027">Spring 2027</option>
+              <option value="Autumn 2027">Autumn 2027</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="priorQualifications">Prior Academic Record Brief</label>
+          <textarea id="priorQualifications" rows="4" placeholder="Briefly specify your higher secondary score or university graduation degree marks..."></textarea>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+          <button type="reset" class="btn btn-secondary" style="flex: 1;">Clear Form</button>
+          <button type="submit" class="btn btn-primary" style="flex: 1;">Submit Inquiry Details</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="college-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Apex Institute</h4>
+        <p style="font-size: 0.85rem; line-height: 1.5;">Leading the way in digital learning, wireless research, and secure software development architectures.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home Portal</a></li>
+          <li><a href="about.html">About College</a></li>
+          <li><a href="courses.html">Academic Courses</a></li>
+          <li><a href="registration.html">Enrollment Forms</a></li>
+          <li><a href="contact.html">Contact Information</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Desk</h4>
+        <p style="font-size: 0.85rem; line-height: 1.6;">
+          Apex Campus Lane, Sector V<br>
+          Wireless District, WD-89092<br>
+          Phone: +1-555-APEX-01<br>
+          Mail: admissions@apex.edu
+        </p>
+      </div>
+    </div>
+    <div style="text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem;">
+      <p>&copy; 2026 Apex Institute of Science &amp; Technology. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function submitInquiry(event) {
+      event.preventDefault();
+      const name = document.getElementById('studentName').value;
+      const course = document.getElementById('targetCourse').value;
+      alert(`Thank you, ${name}! Your inquiry for ${course} has been submitted. Our admissions counselor will contact you shortly.`);
+      document.getElementById('inquiryForm').reset();
+    }
+    function resetInquiry() {
+      console.log("Inquiry Form reset.");
+    }
+  </script>
+</body>
+</html>

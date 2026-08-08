@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 9: Observing Internet Protocols - Network Tab Simulator</title>
+  <link rel="stylesheet" href="../global.css">
+  <style>
+    .network-container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+    }
+
+    .step-list {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: rgba(13, 22, 43, 0.3);
+    }
+
+    .step-list li {
+      margin-bottom: 0.75rem;
+      list-style-type: decimal;
+      margin-left: 1.25rem;
+    }
+
+    /* Network Monitor Simulator CSS styling */
+    .network-monitor {
+      background: #090f1d;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+
+    .monitor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding-bottom: 0.75rem;
+    }
+
+    .monitor-controls {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .network-table-wrapper {
+      overflow-x: auto;
+      max-height: 350px;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px;
+    }
+
+    .network-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      text-align: left;
+    }
+
+    .network-table th {
+      background: #111b30;
+      color: var(--text-muted);
+      padding: 0.75rem;
+      font-weight: 500;
+      border-bottom: 2px solid var(--border-color);
+      position: sticky;
+      top: 0;
+    }
+
+    .network-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .network-table tr:hover {
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    .status-ok { color: #10b981; }
+    .status-warning { color: #f59e0b; }
+    .status-error { color: #ef4444; }
+
+    .waterfall-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: var(--accent-blue);
+      display: inline-block;
+    }
+
+    .waterfall-delay {
+      height: 8px;
+      background: rgba(99, 140, 243, 0.15);
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container fade-in">
+    <a href="../index.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Dashboard
+    </a>
+
+    <!-- Header -->
+    <header class="header-banner">
+      <div>
+        <h1 class="title-glow" style="font-size: 1.8rem;">Observing Internet Protocols &amp; DevTools</h1>
+        <p class="sub-title">Experiment 9: Tutorial checklist and interactive live network telemetry simulator.</p>
+      </div>
+    </header>
+
+    <div class="glass-panel network-container">
+      
+      <!-- Tutorial Guide Section -->
+      <h2 style="color: #fff; font-size: 1.4rem; margin-bottom: 1rem; font-family: 'Outfit';">1. How to Use Browser Developer Tools (Network Tab)</h2>
+      <div class="step-list">
+        <ol>
+          <li>Press <span class="emphasis-text">F12</span> or right-click the page and select <span class="emphasis-text">Inspect</span> to open the Developer Tools pane.</li>
+          <li>Navigate to the <span class="emphasis-text">Network</span> tab at the top of the DevTools menu.</li>
+          <li>Reload the page (<span class="emphasis-text">Ctrl + R</span> or <span class="emphasis-text">F5</span>) with the tab open to start capturing assets.</li>
+          <li>Locate columns for:
+            <ul>
+              <li><b>Name:</b> The asset filename or resource path URL.</li>
+              <li><b>Status:</b> HTTP Response Status Codes (e.g. <code>200 OK</code>, <code>404 Not Found</code>).</li>
+              <li><b>Protocol:</b> The transport standard used (e.g. <code>h2</code> for HTTP/2, <code>h3</code> for HTTP/3, <code>http/1.1</code>).</li>
+              <li><b>Method:</b> The request method verb (e.g. <code>GET</code>, <code>POST</code>, <code>OPTIONS</code>).</li>
+              <li><b>Type:</b> Content-Type mime descriptor (e.g. <code>document</code>, <code>stylesheet</code>, <code>script</code>, <code>fetch</code>).</li>
+              <li><b>Size:</b> Payload transfer volume in bytes (gzipped vs. raw).</li>
+              <li><b>Time:</b> Complete latency from socket connection to download closure.</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Live Interactive Simulator Section -->
+      <h2 style="color: #fff; font-size: 1.4rem; margin-bottom: 1rem; font-family: 'Outfit';">2. Interactive In-Page Network simulator</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+        Trigger mock network requests below. The simulator records each request, charting parameters exactly like browser DevTools.
+      </p>
+
+      <div class="network-monitor">
+        <!-- Simulator Controls -->
+        <div class="monitor-header">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: red; animation: pulse 1.5s infinite;"></div>
+            <strong style="font-family: 'Outfit'; font-size: 0.95rem;">Capturing Network Traffic...</strong>
+          </div>
+          <button class="btn btn-secondary" style="padding: 0.3rem 0.75rem; font-size: 0.8rem;" onclick="clearNetworkLog()">Clear Log</button>
+        </div>
+
+        <div class="monitor-controls">
+          <button class="btn btn-primary" onclick="simulateRequest('fetchConfig')">Fetch config.json</button>
+          <button class="btn btn-primary" onclick="simulateRequest('uploadData')">Post Data Payload</button>
+          <button class="btn btn-primary" onclick="simulateRequest('loadImage')">Load Image Resource</button>
+          <button class="btn btn-primary" onclick="simulateRequest('triggerError')">Trigger Server 404</button>
+          <button class="btn btn-primary" onclick="simulateRequest('staticAssets')">Load Styles (HTTP/2)</button>
+        </div>
+
+        <!-- Network Table -->
+        <div class="network-table-wrapper">
+          <table id="networkTable" class="network-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Protocol</th>
+                <th>Method</th>
+                <th>Type</th>
+                <th>Size</th>
+                <th>Time (ms)</th>
+                <th style="width: 150px;">Waterfall</th>
+              </tr>
+            </thead>
+            <tbody id="networkTableBody">
+              <tr id="emptyRow">
+                <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 2rem;">No network requests recorded. Click a button above to run simulated calls.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 1.5rem;">
+        Tip: Open your actual browser's DevTools (<span class="emphasis-text">F12</span>) -> Network tab, and press the buttons above to witness the actual fetch requests captured in both tables!
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const mockRequestDetails = {
+      fetchConfig: {
+        name: '/api/v1/config.json',
+        status: 200,
+        statusText: 'OK',
+        protocol: 'HTTP/3',
+        method: 'GET',
+        type: 'fetch',
+        size: '1.2 KB',
+        timeRange: [40, 110]
+      },
+      uploadData: {
+        name: '/api/v1/telemetry/submit',
+        status: 201,
+        statusText: 'Created',
+        protocol: 'HTTP/1.1',
+        method: 'POST',
+        type: 'fetch',
+        size: '24.5 KB',
+        timeRange: [200, 450]
+      },
+      loadImage: {
+        name: '/assets/images/campus-map.webp',
+        status: 200,
+        statusText: 'OK',
+        protocol: 'HTTP/2',
+        method: 'GET',
+        type: 'image',
+        size: '142.3 KB',
+        timeRange: [120, 280]
+      },
+      triggerError: {
+        name: '/api/v2/secure-auth-kernel',
+        status: 404,
+        statusText: 'Not Found',
+        protocol: 'HTTP/3',
+        method: 'GET',
+        type: 'fetch',
+        size: '340 B',
+        timeRange: [15, 60]
+      },
+      staticAssets: {
+        name: '/assets/css/global-critical.css',
+        status: 200,
+        statusText: 'OK (from disk cache)',
+        protocol: 'HTTP/2',
+        method: 'GET',
+        type: 'stylesheet',
+        size: '8.4 KB',
+        timeRange: [5, 20]
+      }
+    };
+
+    function simulateRequest(key) {
+      const emptyRow = document.getElementById('emptyRow');
+      if (emptyRow) emptyRow.remove();
+
+      const details = mockRequestDetails[key];
+      const tbody = document.getElementById('networkTableBody');
+
+      // Randomise time within range
+      const time = Math.floor(Math.random() * (details.timeRange[1] - details.timeRange[0]) + details.timeRange[0]);
+      
+      const tr = document.createElement('tr');
+      
+      // Status class
+      let statusClass = 'status-ok';
+      if (details.status >= 400) statusClass = 'status-error';
+      else if (details.status >= 300) statusClass = 'status-warning';
+
+      // Waterfall width (scaled to time)
+      const maxTime = 450;
+      const pct = Math.min((time / maxTime) * 100, 100);
+      const delayPct = Math.max(0, (details.timeRange[0] / maxTime) * 100);
+
+      tr.innerHTML = `
+        <td style="color: #fff; font-weight: 500;">${details.name}</td>
+        <td class="${statusClass}">${details.status} <span style="font-size: 0.7rem; color: var(--text-muted);">${details.statusText}</span></td>
+        <td><span class="badge badge-purple" style="font-size: 0.65rem;">${details.protocol}</span></td>
+        <td style="color: var(--accent-cyan); font-weight: 600;">${details.method}</td>
+        <td>${details.type}</td>
+        <td>${details.size}</td>
+        <td style="color: var(--accent-green);">${time} ms</td>
+        <td>
+          <div style="width: 100px; display: flex; align-items: center;">
+            <span class="waterfall-delay" style="width: ${delayPct}px;"></span>
+            <span class="waterfall-bar" style="width: ${pct}px;"></span>
+          </div>
+        </td>
+      `;
+
+      tbody.appendChild(tr);
+
+      // Scroll to bottom of monitor
+      const wrapper = document.querySelector('.network-table-wrapper');
+      wrapper.scrollTop = wrapper.scrollHeight;
+
+      // Trigger actual light Fetch request in background so the REAL browser DevTools captures a real network request too!
+      // Using public mock API or a self request
+      fetch(`../index.html?simulated_call=${key}_captured_live`)
+        .catch(() => {});
+    }
+
+    function clearNetworkLog() {
+      const tbody = document.getElementById('networkTableBody');
+      tbody.innerHTML = `
+        <tr id="emptyRow">
+          <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 2rem;">No network requests recorded. Click a button above to run simulated calls.</td>
+        </tr>
+      `;
+    }
+  </script>
+</body>
+</html>

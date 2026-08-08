@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 7: XML Student Database Parser</title>
+  <link rel="stylesheet" href="../global.css">
+  <style>
+    .xml-viewer-card {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+    }
+
+    .search-box-container {
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .student-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      background: rgba(13, 22, 43, 0.45);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .student-table th {
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--accent-cyan);
+      font-family: 'Outfit', sans-serif;
+      text-align: left;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.95rem;
+    }
+
+    .student-table td {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      font-size: 0.9rem;
+    }
+
+    .student-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .student-table tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .tab-bar {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .tab-button {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      border-bottom: 2px solid transparent;
+      transition: all var(--transition-fast);
+    }
+
+    .tab-button.active {
+      color: var(--accent-blue);
+      border-bottom-color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .raw-xml-code {
+      background: #04070d;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.25rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: #3b82f6;
+      white-space: pre;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container fade-in">
+    <a href="../index.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Dashboard
+    </a>
+
+    <!-- Header -->
+    <header class="header-banner">
+      <div>
+        <h1 class="title-glow" style="font-size: 1.8rem;">XML Database Parsing &amp; Rendering</h1>
+        <p class="sub-title">Experiment 7: Resolves structural XML files using Fetch and the DOMParser API.</p>
+      </div>
+    </header>
+
+    <div class="glass-panel xml-viewer-card">
+      <!-- Tabs to switch between parsed view and raw XML -->
+      <div class="tab-bar">
+        <button id="tabParsed" class="tab-button active" onclick="switchTab('parsed')">Parsed Records Table</button>
+        <button id="tabRaw" class="tab-button" onclick="switchTab('raw')">Raw students.xml Source</button>
+      </div>
+
+      <!-- PARSED TAB -->
+      <div id="contentParsed" class="tab-content active">
+        <!-- Search and Filter -->
+        <div class="search-box-container">
+          <input type="text" id="searchInput" placeholder="Search by name, roll number, or department..." oninput="filterTable()">
+          <button class="btn btn-secondary" onclick="loadXMLData()">Reload XML</button>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="student-table">
+            <thead>
+              <tr>
+                <th>Roll Number</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Year</th>
+                <th>Email</th>
+                <th>Mobile</th>
+              </tr>
+            </thead>
+            <tbody id="studentTableBody">
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-muted);">Fetching XML records...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- RAW TAB -->
+      <div id="contentRaw" class="tab-content">
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Below is the raw XML code parsed by the application client:</p>
+        <pre class="raw-xml-code"><code id="rawXmlCodeText">Loading raw XML code...</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let studentRecords = [];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadXMLData();
+    });
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+      if (tabName === 'parsed') {
+        document.getElementById('tabParsed').classList.add('active');
+        document.getElementById('contentParsed').classList.add('active');
+      } else {
+        document.getElementById('tabRaw').classList.add('active');
+        document.getElementById('contentRaw').classList.add('active');
+      }
+    }
+
+    function loadXMLData() {
+      const tableBody = document.getElementById('studentTableBody');
+      const xmlCodeBlock = document.getElementById('rawXmlCodeText');
+      tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--text-muted);">Fetching and parsing XML...</td></tr>';
+
+      // Fetch the XML file
+      fetch('students.xml')
+        .then(response => {
+          if (!response.ok) throw new Error("Network response error loading XML.");
+          return response.text();
+        })
+        .then(xmlText => {
+          // Render raw XML in code tab
+          xmlCodeBlock.innerText = xmlText;
+
+          // Parse XML using DOMParser
+          const parser = new DOMParser();
+          const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+          
+          // Check for parsing errors
+          const parserError = xmlDoc.getElementsByTagName("parsererror");
+          if (parserError.length > 0) {
+            throw new Error("XML Parsing error: " + parserError[0].textContent);
+          }
+
+          // Extract student elements
+          const students = xmlDoc.getElementsByTagName("student");
+          studentRecords = [];
+
+          for (let i = 0; i < students.length; i++) {
+            const studentNode = students[i];
+            studentRecords.push({
+              rollNumber: studentNode.getElementsByTagName("rollNumber")[0]?.textContent || '',
+              name: studentNode.getElementsByTagName("name")[0]?.textContent || '',
+              department: studentNode.getElementsByTagName("department")[0]?.textContent || '',
+              year: studentNode.getElementsByTagName("year")[0]?.textContent || '',
+              email: studentNode.getElementsByTagName("email")[0]?.textContent || '',
+              mobileNumber: studentNode.getElementsByTagName("mobileNumber")[0]?.textContent || ''
+            });
+          }
+
+          renderTable(studentRecords);
+        })
+        .catch(err => {
+          tableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--accent-red);">Error: ${err.message}</td></tr>`;
+          xmlCodeBlock.innerText = `Failed to load XML database:\n${err.message}`;
+        });
+    }
+
+    function renderTable(records) {
+      const tableBody = document.getElementById('studentTableBody');
+      if (records.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--text-muted);">No records found.</td></tr>';
+        return;
+      }
+
+      tableBody.innerHTML = records.map(student => `
+        <tr>
+          <td style="font-family: 'Fira Code', monospace; color: var(--accent-cyan); font-weight: 500;">${escapeHtml(student.rollNumber)}</td>
+          <td><b>${escapeHtml(student.name)}</b></td>
+          <td>${escapeHtml(student.department)}</td>
+          <td>${escapeHtml(student.year)}</td>
+          <td><a href="mailto:${escapeHtml(student.email)}" style="color: var(--accent-blue); text-decoration: none;">${escapeHtml(student.email)}</a></td>
+          <td style="font-family: 'Fira Code', monospace; font-size: 0.85rem;">${escapeHtml(student.mobileNumber)}</td>
+        </tr>
+      `).join('');
+    }
+
+    function filterTable() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = studentRecords.filter(student => 
+        student.name.toLowerCase().includes(query) ||
+        student.rollNumber.toLowerCase().includes(query) ||
+        student.department.toLowerCase().includes(query)
+      );
+      renderTable(filtered);
+    }
+
+    function escapeHtml(unsafe) {
+      return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>

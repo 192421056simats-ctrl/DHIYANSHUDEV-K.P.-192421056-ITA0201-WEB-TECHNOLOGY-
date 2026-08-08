@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 4: Student Registration Form - Campus Enrollment</title>
+  <link rel="stylesheet" href="../global.css">
+  <style>
+    .form-container {
+      max-width: 650px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .form-title {
+      font-size: 1.75rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-subtitle {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .radio-checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      background: rgba(8, 13, 26, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+    }
+
+    .inline-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .inline-option input {
+      accent-color: var(--accent-blue);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .form-actions button {
+      flex: 1;
+    }
+
+    /* Toast notification styling */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(16, 185, 129, 0.95);
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: var(--glow-green);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container fade-in">
+    <a href="../index.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Dashboard
+    </a>
+
+    <div class="glass-panel form-container">
+      <header class="form-header">
+        <h1 class="form-title">Student Registration Portal</h1>
+        <p class="form-subtitle">Register for courses and hostel accommodations for the upcoming academic term.</p>
+      </header>
+
+      <form id="registrationForm" onsubmit="handleFormSubmit(event)" onreset="handleFormReset()">
+        <!-- Text Box -->
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" placeholder="Enter your full name" required>
+        </div>
+
+        <!-- Text Box (Roll Number) -->
+        <div class="form-group">
+          <label for="rollNo">Student Roll Number</label>
+          <input type="text" id="rollNo" placeholder="e.g. CSE-2024-042" required>
+        </div>
+
+        <div class="grid-2">
+          <!-- Email Field -->
+          <div class="form-group">
+            <label for="studentEmail">Institutional Email</label>
+            <input type="email" id="studentEmail" placeholder="username@campus.edu" required>
+          </div>
+
+          <!-- Password Field -->
+          <div class="form-group">
+            <label for="securityPin">Security PIN / Password</label>
+            <input type="password" id="securityPin" placeholder="Create secure password" required>
+          </div>
+        </div>
+
+        <!-- Radio Buttons (Department Selection) -->
+        <div class="form-group">
+          <label>Department Selection</label>
+          <div class="radio-checkbox-group">
+            <label class="inline-option">
+              <input type="radio" name="department" value="Computer Science & Engineering" checked>
+              Computer Science &amp; Engineering (CSE)
+            </label>
+            <label class="inline-option">
+              <input type="radio" name="department" value="Information Technology">
+              Information Technology (IT)
+            </label>
+            <label class="inline-option">
+              <input type="radio" name="department" value="Electronics & Communication">
+              Electronics &amp; Communication (ECE)
+            </label>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <!-- Dropdown List (Semester) -->
+          <div class="form-group">
+            <label for="semester">Current Semester</label>
+            <select id="semester" required>
+              <option value="" disabled selected>Select Semester</option>
+              <option value="Semester I">Semester I</option>
+              <option value="Semester II">Semester II</option>
+              <option value="Semester III">Semester III</option>
+              <option value="Semester IV">Semester IV</option>
+              <option value="Semester V">Semester V</option>
+              <option value="Semester VI">Semester VI</option>
+              <option value="Semester VII">Semester VII</option>
+              <option value="Semester VIII">Semester VIII</option>
+            </select>
+          </div>
+
+          <!-- Dropdown List (Hostel Block) -->
+          <div class="form-group">
+            <label for="hostelBlock">Hostel Block Option</label>
+            <select id="hostelBlock" required>
+              <option value="" disabled selected>Select Preference</option>
+              <option value="Block A (Boys - AC)">Block A (Boys - AC)</option>
+              <option value="Block B (Boys - Non-AC)">Block B (Boys - Non-AC)</option>
+              <option value="Block C (Girls - AC)">Block C (Girls - AC)</option>
+              <option value="Block D (Girls - Non-AC)">Block D (Girls - Non-AC)</option>
+              <option value="Day Scholar (No Hostel)">Day Scholar (No Hostel)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Checkboxes (Electives Selection) -->
+        <div class="form-group">
+          <label>Select Elective Subjects</label>
+          <div class="radio-checkbox-group">
+            <label class="inline-option">
+              <input type="checkbox" name="electives" value="Wireless Network Security">
+              Wireless Network Security (CSE-401)
+            </label>
+            <label class="inline-option">
+              <input type="checkbox" name="electives" value="Introduction to Quantum Cryptography">
+              Introduction to Quantum Cryptography (CSE-402)
+            </label>
+            <label class="inline-option">
+              <input type="checkbox" name="electives" value="Applied Web Technologies">
+              Applied Web Technologies (CSE-403)
+            </label>
+            <label class="inline-option">
+              <input type="checkbox" name="electives" value="IoT Hardware Integrity">
+              IoT Hardware Integrity (CSE-404)
+            </label>
+          </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group">
+          <label for="medicalRemarks">Special Requests / Medical Remarks</label>
+          <textarea id="medicalRemarks" rows="4" placeholder="Specify any dietary requirements, room accessibility needs, or medical remarks..."></textarea>
+        </div>
+
+        <!-- Submit & Reset Buttons -->
+        <div class="form-actions">
+          <button type="reset" class="btn btn-secondary">Reset Form</button>
+          <button type="submit" class="btn btn-primary">Submit Registration</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Alert -->
+  <div id="toastAlert" class="toast">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.25rem;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span id="toastMessage">Registration Submitted Successfully!</span>
+  </div>
+
+  <script>
+    function handleFormSubmit(event) {
+      event.preventDefault(); // Stop page reload
+      
+      const name = document.getElementById('fullName').value;
+      const roll = document.getElementById('rollNo').value;
+      const dept = document.querySelector('input[name="department"]:checked').value;
+      const sem = document.getElementById('semester').value;
+      
+      // Select selected electives
+      const checkboxes = document.querySelectorAll('input[name="electives"]:checked');
+      const electives = Array.from(checkboxes).map(cb => cb.value);
+      
+      console.log("Registration Details Submitting:", { name, roll, dept, sem, electives });
+
+      // Trigger success toast
+      const toast = document.getElementById('toastAlert');
+      document.getElementById('toastMessage').innerText = `Success! Registered: ${name} (${roll})`;
+      toast.classList.add('active');
+      
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 4000);
+    }
+
+    function handleFormReset() {
+      // Small trigger toast on reset
+      const toast = document.getElementById('toastAlert');
+      toast.style.background = "rgba(239, 68, 68, 0.95)";
+      toast.style.boxShadow = "0 0 15px rgba(239, 68, 68, 0.4)";
+      document.getElementById('toastMessage').innerText = "Form cleared successfully!";
+      toast.classList.add('active');
+      
+      setTimeout(() => {
+        toast.classList.remove('active');
+        // Reset color style
+        toast.style.background = "";
+        toast.style.boxShadow = "";
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
