@@ -1,0 +1,765 @@
+/* ==========================================================================
+   COURSE: WEB TECHNOLOGY (ITA02_WEB)
+   UNIT II SKILL DEVELOPMENT LABORATORY ASSESSMENT: CASCADING STYLE SHEETS
+   STUDENT: DHIYANSHU DEV K.P. | REGISTER NO: 192421056
+   INSTITUTION: SIMATS UNIVERSITY, CHENNAI
+   EXTERNAL CSS STYLESHEET (style.css)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS DESIGN TOKENS & ROOT VARIABLES
+   -------------------------------------------------------------------------- */
+:root {
+    /* Color Palette */
+    --bg-main: #0b0f19;
+    --bg-card: rgba(21, 29, 46, 0.75);
+    --bg-card-hover: rgba(26, 36, 56, 0.85);
+    --bg-card-border: rgba(255, 255, 255, 0.12);
+    --bg-input: rgba(255, 255, 255, 0.05);
+
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --text-heading: #ffffff;
+
+    --accent-primary: #6366f1;
+    --accent-secondary: #a855f7;
+    --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    --card-gradient: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+
+    /* Shadows & Effects */
+    --box-shadow-card: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    --box-shadow-hover: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
+    --text-shadow-heading: 0 2px 10px rgba(99, 102, 241, 0.3);
+
+    /* Radii & Dimensions */
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 8px;
+    --radius-pill: 9999px;
+
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light Theme Overrides */
+body.light-theme {
+    --bg-main: #f1f5f9;
+    --bg-card: rgba(255, 255, 255, 0.9);
+    --bg-card-hover: rgba(255, 255, 255, 0.98);
+    --bg-card-border: rgba(99, 102, 241, 0.18);
+    --bg-input: rgba(0, 0, 0, 0.04);
+
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --text-heading: #0f172a;
+
+    --box-shadow-card: 0 20px 40px -15px rgba(99, 102, 241, 0.15);
+    --text-shadow-heading: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --------------------------------------------------------------------------
+   2. GLOBAL RESETS & SELECTOR TYPE 1: ELEMENT SELECTORS
+   -------------------------------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Global box-sizing */
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Group Selectors for Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-heading);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+/* Group Selectors for Form Controls */
+input, select, textarea {
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+/* Background Ambient Orbs */
+.bg-blur {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.55;
+}
+
+.bg-blur-1 { width: 450px; height: 450px; background: #6366f1; top: -120px; left: -120px; }
+.bg-blur-2 { width: 500px; height: 500px; background: #a855f7; bottom: -150px; right: -120px; }
+
+/* Glassmorphism Card Utility */
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--bg-card-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--box-shadow-card);
+    transition: var(--transition);
+}
+
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   3. BEYOND NORMAL FLOW: STICKY NAVBAR (#main-header ID SELECTOR)
+   -------------------------------------------------------------------------- */
+.sticky-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Layering above other elements */
+    background: rgba(11, 15, 25, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--bg-card-border);
+    transition: var(--transition);
+}
+
+body.light-theme .sticky-navbar {
+    background: rgba(241, 245, 249, 0.9);
+}
+
+/* Child Selector: .header-container > .brand-logo */
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1.5rem;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--text-heading);
+}
+
+.logo-icon { font-size: 1.8rem; }
+.portal-title { font-size: 1.25rem; font-weight: 800; line-height: 1.1; }
+.uni-subtitle { font-size: 0.72rem; color: var(--text-muted); font-weight: 600; }
+
+/* Descendant Selector: nav.main-nav ul.nav-list li a */
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+/* Pseudo-class Selectors: :hover & .active */
+.nav-link:hover, .nav-link.active {
+    color: #ffffff;
+    background: var(--accent-gradient);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.theme-toggle-btn {
+    background: var(--bg-input);
+    border: 1px solid var(--bg-card-border);
+    color: var(--text-main);
+    padding: 0.45rem 1rem;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.82rem;
+    transition: var(--transition);
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   4. HERO SECTION
+   -------------------------------------------------------------------------- */
+.hero-section {
+    padding: 3.5rem 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.campaign-badge {
+    background: var(--accent-gradient);
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.35rem 1rem;
+    border-radius: var(--radius-pill);
+    display: inline-block;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+}
+
+/* Pseudo-element Selector: .hero-title::after */
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+    text-shadow: var(--text-shadow-heading);
+    position: relative;
+}
+
+.hero-description {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 800px;
+    margin: 0 auto 1.75rem auto;
+}
+
+.hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    font-size: 0.92rem;
+}
+
+.meta-item {
+    background: var(--bg-input);
+    border: 1px solid var(--bg-card-border);
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-sm);
+}
+
+.hero-cta-group {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+}
+
+/* Button Classes */
+.btn {
+    padding: 0.8rem 1.8rem;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background: var(--accent-gradient);
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.6);
+}
+
+.btn-secondary {
+    background: var(--bg-input);
+    color: var(--text-main);
+    border: 1px solid var(--bg-card-border);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   5. EVENT CATALOGUE SECTION & FLEXBOX/GRID LAYOUT
+   -------------------------------------------------------------------------- */
+.section-container {
+    margin-bottom: 3.5rem;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+/* Pseudo-element Selector: .sub-header-tag::before */
+.sub-header-tag {
+    color: var(--accent-primary);
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.sub-header-tag::before {
+    content: "◈ ";
+    color: var(--accent-secondary);
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 0.4rem;
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Primary Event Grid Layout (CSS Grid) */
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 Column Desktop Layout */
+    gap: 1.5rem;
+}
+
+/* Child Selector: .event-grid > .event-card & CSS Box Model */
+.event-grid > .event-card {
+    position: relative; /* Relative positioning context for absolute badge */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    /* Explicit Box Model Demonstration */
+    padding: 1.25rem;
+    border: 2px solid var(--bg-card-border);
+    margin: 0; 
+    border-radius: var(--radius-md);
+    
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.event-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-primary);
+    box-shadow: var(--box-shadow-hover);
+    background: var(--bg-card-hover);
+}
+
+/* Beyond Normal Flow: Absolute Positioning for Status Badges */
+.status-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+}
+
+/* Attribute Selectors: span[data-status="open"] */
+span[data-status="open"] {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--success);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+span[data-status="limited"] {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--warning);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+/* Card Media Header */
+.card-media {
+    height: 110px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.tech-bg { background: linear-gradient(135deg, #1e1b4b, #4338ca); }
+.cultural-bg { background: linear-gradient(135deg, #311042, #7e22ce); }
+.placement-bg { background: linear-gradient(135deg, #064e3b, #047857); }
+.sports-bg { background: linear-gradient(135deg, #1e3a8a, #2563eb); }
+
+.card-icon { font-size: 2.5rem; }
+
+.category-tag {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+}
+
+.event-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+}
+
+.event-details {
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+}
+
+.event-desc {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--bg-card-border);
+}
+
+.fee-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--success);
+}
+
+.btn-card-action {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.8rem;
+    background: var(--accent-gradient);
+    color: #ffffff;
+    border-radius: var(--radius-sm);
+}
+
+/* --------------------------------------------------------------------------
+   6. REGISTRATION FORM SECTION & CONTROLS
+   -------------------------------------------------------------------------- */
+.form-wrapper {
+    padding: 2.5rem;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.75rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group.full-width {
+    grid-column: span 2;
+}
+
+label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-heading);
+}
+
+/* Pseudo-element Selector: .required-star::after */
+.required-star {
+    color: var(--danger);
+}
+
+.input-container {
+    position: relative;
+}
+
+/* Attribute Selectors for Form Controls */
+input[type="text"],
+input[type="email"],
+select {
+    width: 100%;
+    background: var(--bg-input);
+    border: 1.5px solid var(--bg-card-border);
+    color: var(--text-main);
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: var(--transition);
+}
+
+/* Pseudo-class Selectors: :focus */
+input:focus, select:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+}
+
+/* Valid and Invalid Feedback States */
+.form-group.valid input, .form-group.valid select {
+    border-color: var(--success);
+}
+
+.form-group.invalid input, .form-group.invalid select {
+    border-color: var(--danger);
+}
+
+.field-error {
+    font-size: 0.75rem;
+    color: var(--danger);
+    min-height: 1rem;
+    font-weight: 600;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--bg-card-border);
+}
+
+/* --------------------------------------------------------------------------
+   7. FOOTER SECTION
+   -------------------------------------------------------------------------- */
+.portal-footer {
+    background: rgba(10, 14, 23, 0.95);
+    border-top: 1px solid var(--bg-card-border);
+    padding: 3rem 1.5rem 1.5rem 1.5rem;
+    margin-top: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.2fr;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.footer-heading {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--accent-primary);
+}
+
+.footer-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--accent-primary);
+    padding-left: 5px;
+}
+
+.footer-bottom {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--bg-card-border);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   8. BEYOND NORMAL FLOW: FIXED HELP BUTTON (#fixed-help-btn ID SELECTOR)
+   -------------------------------------------------------------------------- */
+.fixed-help-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 999; /* Higher z-index to stay on top */
+    background: var(--accent-gradient);
+    color: #ffffff;
+    border: none;
+    padding: 0.8rem 1.4rem;
+    border-radius: var(--radius-pill);
+    font-weight: 800;
+    font-size: 0.88rem;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+    transition: var(--transition);
+}
+
+.fixed-help-btn:hover {
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 12px 30px rgba(99, 102, 241, 0.7);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-overlay.active { display: flex; }
+.modal-card { width: 90%; max-width: 480px; padding: 2rem; }
+.success-icon {
+    width: 60px; height: 60px;
+    background: var(--success);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem auto;
+}
+
+.modal-details {
+    text-align: left;
+    background: var(--bg-input);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    margin: 1.25rem 0;
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   9. RESPONSIVE DESIGN (MEDIA QUERIES)
+   -------------------------------------------------------------------------- */
+
+/* Tablet Breakpoint (max-width: 992px) */
+@media (max-width: 992px) {
+    .event-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 Column Tablet Layout */
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Mobile Breakpoint (max-width: 768px & 375px) */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .nav-list {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .event-grid {
+        grid-template-columns: 1fr; /* Single Column Mobile Layout */
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full-width {
+        grid-column: span 1;
+    }
+
+    .form-wrapper {
+        padding: 1.5rem;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+
+    .fixed-help-btn {
+        bottom: 15px;
+        right: 15px;
+        padding: 0.65rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Ultra Small Viewport (375px Target) */
+@media (max-width: 375px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SIMATS University Responsive Event Registration Portal - Skill Development Assessment Unit II">
+    <meta name="author" content="Dhiyanshu Dev K.P. (Reg No: 192421056)">
+    <title>SIMATS EventHub - University Event Registration Portal</title>
+    
+    <!-- External CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Mandatory Requirement B.1: Internal CSS Demonstration for Notification Banner -->
+    <style>
+        /* Internal CSS Demonstration Section */
+        #internal-demo-banner {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.15));
+            border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+            color: #f8fafc;
+            padding: 0.6rem 1rem;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        #internal-demo-banner strong {
+            color: #818cf8;
+            text-decoration: underline;
+        }
+
+        #internal-demo-banner .badge-inline {
+            background: #6366f1;
+            color: #ffffff;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            margin-right: 0.5rem;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- Ambient Blur Background Elements -->
+    <div class="bg-blur bg-blur-1"></div>
+    <div class="bg-blur bg-blur-2"></div>
+
+    <!-- Demonstration of Internal CSS Header Banner -->
+    <div id="internal-demo-banner">
+        <span class="badge-inline">Notice</span> 
+        Registration Open for <strong>SIMATS National Tech Fest 2026</strong> | Assessment Candidate: <strong>Dhiyanshu Dev K.P. (Reg: 192421056)</strong>
+    </div>
+
+    <!-- Sticky Header Navigation Bar (Beyond Normal Flow: Sticky Positioning) -->
+    <header class="sticky-navbar" id="main-header">
+        <div class="header-container">
+            <a href="#home" class="brand-logo">
+                <span class="logo-icon">🏛️</span>
+                <div>
+                    <h1 class="portal-title">SIMATS EventHub</h1>
+                    <span class="uni-subtitle">SIMATS University, Chennai</span>
+                </div>
+            </a>
+
+            <!-- Main Navigation Menu (Descendant Selectors & Hover Feedback) -->
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#catalogue" class="nav-link">Event Catalogue</a></li>
+                    <li><a href="#registration" class="nav-link">Register Now</a></li>
+                    <li><a href="#contact" class="nav-link">Contact & Help</a></li>
+                </ul>
+            </nav>
+
+            <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode">🌙 Dark Mode</button>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <!-- Hero Campaign Section -->
+        <section id="home" class="hero-section glass-card">
+            <div class="hero-content">
+                <span class="campaign-badge">Annual Skill & Innovation Summit 2026</span>
+                <h2 class="hero-title">Empowering Future Engineers Through Workshops, Hackathons & Placements</h2>
+                <p class="hero-description">
+                    Join over 3,000+ students participating in technical hackathons, cultural festivals, sports tournaments, and corporate placement bootcamps at SIMATS University.
+                </p>
+                <div class="hero-meta">
+                    <span class="meta-item">📅 <strong>Event Period:</strong> Aug 15 – Oct 30, 2026</span>
+                    <span class="meta-item">📍 <strong>Campus:</strong> SIMATS University Tech Complex</span>
+                </div>
+                <div class="hero-cta-group">
+                    <a href="#registration" class="btn btn-primary cta-btn">Register For Events</a>
+                    <a href="#catalogue" class="btn btn-secondary">Explore Catalogue</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Catalogue Section (Flexbox/Grid Responsive Layout) -->
+        <section id="catalogue" class="section-container">
+            <div class="section-header">
+                <span class="sub-header-tag">University Events</span>
+                <h2 class="section-title">Upcoming Event Catalogue</h2>
+                <p class="section-subtitle">Select an event below to register and view schedule details.</p>
+            </div>
+
+            <!-- Event Cards Grid Container -->
+            <div class="event-grid">
+                
+                <!-- Event Card 1: Technical (Used for CSS Box Model Total Width Calculation) -->
+                <article class="event-card glass-card" id="card-hackathon" data-category="technical">
+                    <!-- Positioned Badge (Beyond Normal Flow: Absolute Positioning) -->
+                    <span class="status-badge open-badge" data-status="open">Registration Open</span>
+                    
+                    <div class="card-media tech-bg">
+                        <span class="card-icon">⚡</span>
+                        <span class="category-tag">Technical</span>
+                    </div>
+                    
+                    <div class="card-body">
+                        <h3 class="event-title">HackSIMATS 2026 Hackathon</h3>
+                        <div class="event-details">
+                            <p><strong>📅 Date & Time:</strong> Aug 25, 2026 | 09:00 AM</p>
+                            <p><strong>📍 Venue:</strong> HPC Supercomputing Lab</p>
+                        </div>
+                        <p class="event-desc">
+                            A 36-hour continuous hackathon challenging students to build full-stack cloud and AI solutions for real-world problems.
+                        </p>
+                        <div class="card-footer">
+                            <span class="fee-tag">Free Entry</span>
+                            <button class="btn btn-card-action" onclick="selectEvent('HackSIMATS 2026 Hackathon')">Select & Register</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Event Card 2: Cultural -->
+                <article class="event-card glass-card" id="card-cultural" data-category="cultural">
+                    <span class="status-badge open-badge" data-status="open">Filling Fast</span>
+                    
+                    <div class="card-media cultural-bg">
+                        <span class="card-icon">🎭</span>
+                        <span class="category-tag">Cultural</span>
+                    </div>
+
+                    <div class="card-body">
+                        <h3 class="event-title">AURA Fest Cultural Gala</h3>
+                        <div class="event-details">
+                            <p><strong>📅 Date & Time:</strong> Sep 10, 2026 | 05:00 PM</p>
+                            <p><strong>📍 Venue:</strong> Central Open Auditorium</p>
+                        </div>
+                        <p class="event-desc">
+                            Annual cultural fiesta featuring music bands, choreography contests, theatrical plays, and celebrity performances.
+                        </p>
+                        <div class="card-footer">
+                            <span class="fee-tag">Free Pass</span>
+                            <button class="btn btn-card-action" onclick="selectEvent('AURA Fest Cultural Gala')">Select & Register</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Event Card 3: Placement & Training -->
+                <article class="event-card glass-card" id="card-placement" data-category="placement">
+                    <span class="status-badge open-badge" data-status="open">Mandatory for IT</span>
+                    
+                    <div class="card-media placement-bg">
+                        <span class="card-icon">💼</span>
+                        <span class="category-tag">Placement & Training</span>
+                    </div>
+
+                    <div class="card-body">
+                        <h3 class="event-title">Corporate Placement Bootcamp</h3>
+                        <div class="event-details">
+                            <p><strong>📅 Date & Time:</strong> Sep 18, 2026 | 10:00 AM</p>
+                            <p><strong>📍 Venue:</strong> Placement Cell Seminar Hall</p>
+                        </div>
+                        <p class="event-desc">
+                            Intensive training session on DSA algorithms, mock technical interviews, resume building, and HR negotiations.
+                        </p>
+                        <div class="card-footer">
+                            <span class="fee-tag">Certificate Provided</span>
+                            <button class="btn btn-card-action" onclick="selectEvent('Corporate Placement Bootcamp')">Select & Register</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Event Card 4: Sports -->
+                <article class="event-card glass-card" id="card-sports" data-category="sports">
+                    <span class="status-badge limited-badge" data-status="limited">Limited Slots</span>
+                    
+                    <div class="card-media sports-bg">
+                        <span class="card-icon">⚽</span>
+                        <span class="category-tag">Sports</span>
+                    </div>
+
+                    <div class="card-body">
+                        <h3 class="event-title">Inter-Collegiate Sports Meet</h3>
+                        <div class="event-details">
+                            <p><strong>📅 Date & Time:</strong> Oct 05, 2026 | 07:00 AM</p>
+                            <p><strong>📍 Venue:</strong> University Sports Complex</p>
+                        </div>
+                        <p class="event-desc">
+                            Annual sports tournament spanning cricket, football, basketball, athletics, and chess championships.
+                        </p>
+                        <div class="card-footer">
+                            <span class="fee-tag">Trophies & Medals</span>
+                            <button class="btn btn-card-action" onclick="selectEvent('Inter-Collegiate Sports Meet')">Select & Register</button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Event Registration Form Section -->
+        <section id="registration" class="section-container">
+            <div class="form-wrapper glass-card">
+                <div class="section-header text-center">
+                    <span class="sub-header-tag">Student Entry</span>
+                    <h2 class="section-title">Event Registration Form</h2>
+                    <p class="section-subtitle">
+                        Please fill in your valid student details below. 
+                        <!-- Mandatory Requirement B.1: Demonstration of Inline CSS -->
+                        <span style="color: #ef4444; font-weight: 700; background: rgba(239, 68, 68, 0.1); padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">* All fields marked with asterisk are required</span>
+                    </p>
+                </div>
+
+                <!-- Registration Form -->
+                <form id="registration-form" class="registration-form" novalidate>
+                    <div class="form-grid">
+                        <!-- Student Name -->
+                        <div class="form-group">
+                            <label for="studentName">Student Full Name <span class="required-star">*</span></label>
+                            <div class="input-container">
+                                <input type="text" id="studentName" name="studentName" placeholder="e.g. Dhiyanshu Dev K.P." value="Dhiyanshu Dev K.P." required>
+                            </div>
+                            <span class="field-error" id="nameError"></span>
+                        </div>
+
+                        <!-- Register Number -->
+                        <div class="form-group">
+                            <label for="registerNo">Register Number <span class="required-star">*</span></label>
+                            <div class="input-container">
+                                <input type="text" id="registerNo" name="registerNo" placeholder="e.g. 192421056" value="192421056" required>
+                            </div>
+                            <span class="field-error" id="regError"></span>
+                        </div>
+
+                        <!-- Department -->
+                        <div class="form-group">
+                            <label for="department">Department <span class="required-star">*</span></label>
+                            <div class="input-container">
+                                <select id="department" name="department" required>
+                                    <option value="">-- Select Department --</option>
+                                    <option value="Information Technology" selected>B.Tech - Information Technology (IT)</option>
+                                    <option value="Computer Science">B.Tech - Computer Science & Engg (CSE)</option>
+                                    <option value="Cyber Security">B.Tech - Cyber Security</option>
+                                    <option value="Electronics">B.Tech - Electronics & Communication (ECE)</option>
+                                    <option value="Mechanical">B.Tech - Mechanical Engineering</option>
+                                </select>
+                            </div>
+                            <span class="field-error" id="deptError"></span>
+                        </div>
+
+                        <!-- Email Address -->
+                        <div class="form-group">
+                            <label for="email">Student Email Address <span class="required-star">*</span></label>
+                            <div class="input-container">
+                                <input type="email" id="email" name="email" placeholder="e.g. 192421056.simats@saveetha.com" value="192421056.simats@saveetha.com" required>
+                            </div>
+                            <span class="field-error" id="emailError"></span>
+                        </div>
+
+                        <!-- Event Selection Dropdown -->
+                        <div class="form-group full-width">
+                            <label for="eventSelect">Select Desired Event <span class="required-star">*</span></label>
+                            <div class="input-container">
+                                <select id="eventSelect" name="eventSelect" required>
+                                    <option value="">-- Choose an Event from Catalogue --</option>
+                                    <option value="HackSIMATS 2026 Hackathon" selected>HackSIMATS 2026 Hackathon (Technical)</option>
+                                    <option value="AURA Fest Cultural Gala">AURA Fest Cultural Gala (Cultural)</option>
+                                    <option value="Corporate Placement Bootcamp">Corporate Placement Bootcamp (Placement)</option>
+                                    <option value="Inter-Collegiate Sports Meet">Inter-Collegiate Sports Meet (Sports)</option>
+                                </select>
+                            </div>
+                            <span class="field-error" id="eventError"></span>
+                        </div>
+                    </div>
+
+                    <!-- Form Action Buttons -->
+                    <div class="form-actions">
+                        <button type="reset" class="btn btn-secondary">Reset Fields</button>
+                        <button type="submit" class="btn btn-primary" id="submitFormBtn">Submit Registration</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer id="contact" class="portal-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3 class="footer-heading">SIMATS EventHub</h3>
+                <p class="footer-desc">Official event registration portal of SIMATS University, Chennai. Facilitating student participation in technical, cultural, placement and athletic activities.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Portal Home</a></li>
+                    <li><a href="#catalogue">Event Catalogue</a></li>
+                    <li><a href="#registration">Registration Form</a></li>
+                    <li><a href="#">Academic Calendar</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-heading">Contact Information</h3>
+                <p>📍 SIMATS University Campus, Chennai, TN, India</p>
+                <p>📧 Email: <a href="mailto:192421056.simats@saveetha.com">192421056.simats@saveetha.com</a></p>
+                <p>📱 Phone: +91 6379691518</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 SIMATS University. Course Code: ITA02_WEB | Student: <strong>Dhiyanshu Dev K.P. (Reg: 192421056)</strong>. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Fixed Help Button (Beyond Normal Flow: Fixed Positioning) -->
+    <button id="fixed-help-btn" class="fixed-help-btn" onclick="alert('Need help with registration? Contact SIMATS Student Support at 192421056.simats@saveetha.com or call +91 6379691518.')">
+        💬 Help & Support
+    </button>
+
+    <!-- Success Modal Overlay -->
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-card glass-card text-center">
+            <div class="success-icon">✓</div>
+            <h2>Registration Successful!</h2>
+            <div id="modalDetails" class="modal-details"></div>
+            <button class="btn btn-primary" onclick="closeModal()">Close Confirmation</button>
+        </div>
+    </div>
+
+    <!-- External Script File -->
+    <script src="script.js"></script>
+</body>
+</html>
