@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 5 - Responsive College Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    <!-- Sticky Glassmorphism Header / Navbar -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <span class="logo-icon">🏛️</span>
+                <span class="logo-text">SIMATS University</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#departments" class="nav-link">Departments</a>
+                <a href="#faculty" class="nav-link">Faculty</a>
+                <a href="#admissions" class="nav-link">Admissions</a>
+                <a href="#events" class="nav-link">Events</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#placements" class="nav-link">Placements</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button id="themeToggleBtn" class="theme-btn" aria-label="Toggle Theme">🌙</button>
+                <button id="hamburgerBtn" class="hamburger-btn" aria-label="Toggle Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <canvas id="heroCanvas" class="hero-canvas"></canvas>
+            <div class="hero-content">
+                <span class="hero-badge">Excellence in Innovation & Research</span>
+                <h1 class="hero-title">Shaping Future Engineers & Innovators</h1>
+                <p class="hero-subtitle">Empowering students with world-class technical education, modern laboratories, and industry-leading placements.</p>
+                <div class="hero-buttons">
+                    <a href="#admissions" class="btn primary-btn">Apply Now 2026</a>
+                    <a href="#departments" class="btn secondary-btn">Explore Programs</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="section-header">
+                <span class="section-tag">Overview</span>
+                <h2>About Our Institution</h2>
+                <p>Pioneering education, research, and technical leadership for over three decades.</p>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-card glass-card">
+                    <span class="card-icon">🎯</span>
+                    <h3>Our Vision</h3>
+                    <p>To emerge as a premier global technological university nurturing sustainable innovation, ethics, and academic excellence.</p>
+                </div>
+                <div class="about-card glass-card">
+                    <span class="card-icon">🚀</span>
+                    <h3>Our Mission</h3>
+                    <p>To impart state-of-the-art technical knowledge through experiential learning, industry collaboration, and cutting-edge research.</p>
+                </div>
+                <div class="about-card glass-card">
+                    <span class="card-icon">🏆</span>
+                    <h3>Accreditations</h3>
+                    <p>NAAC A++ Grade Accredited, Autonomous Status, Tier-1 NBA Accredited Programs with Top 50 NIRF Ranking.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Departments Section -->
+        <section id="departments" class="section">
+            <div class="section-header">
+                <span class="section-tag">Academics</span>
+                <h2>Academic Departments</h2>
+            </div>
+            <div class="grid-3-col">
+                <div class="dept-card glass-card">
+                    <span class="dept-icon">💻</span>
+                    <h3>Computer Science & Engg.</h3>
+                    <p>Specializations in AI/ML, Cloud Computing, and Full-Stack Engineering.</p>
+                    <span class="intake-badge">Intake: 240 Seats</span>
+                </div>
+                <div class="dept-card glass-card">
+                    <span class="dept-icon">🛡️</span>
+                    <h3>Cyber Security & Forensics</h3>
+                    <p>Focusing on Ethical Hacking, Network Security, and WPA3 Security Protocols.</p>
+                    <span class="intake-badge">Intake: 120 Seats</span>
+                </div>
+                <div class="dept-card glass-card">
+                    <span class="dept-icon">⚡</span>
+                    <h3>Electronics & Communication</h3>
+                    <p>VLSI Design, Embedded Systems, Internet of Things (IoT), and Signal Processing.</p>
+                    <span class="intake-badge">Intake: 180 Seats</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Faculty Section -->
+        <section id="faculty" class="section">
+            <div class="section-header">
+                <span class="section-tag">Mentorship</span>
+                <h2>Distinguished Faculty</h2>
+            </div>
+            <div class="grid-4-col">
+                <div class="faculty-card glass-card">
+                    <div class="faculty-avatar">Dr. A</div>
+                    <h3>Dr. Alan Vance</h3>
+                    <p class="role">Head of CSE Department</p>
+                    <p class="qual">Ph.D. Computer Science (MIT)</p>
+                </div>
+                <div class="faculty-card glass-card">
+                    <div class="faculty-avatar">Dr. S</div>
+                    <h3>Dr. Sarah Jenkins</h3>
+                    <p class="role">Professor - AI & Security</p>
+                    <p class="qual">Ph.D. Cybersecurity (Stanford)</p>
+                </div>
+                <div class="faculty-card glass-card">
+                    <div class="faculty-avatar">Prof. R</div>
+                    <h3>Prof. Robert Chen</h3>
+                    <p class="role">Associate Dean (Research)</p>
+                    <p class="qual">M.Tech, Senior IEEE Member</p>
+                </div>
+                <div class="faculty-card glass-card">
+                    <div class="faculty-avatar">Dr. E</div>
+                    <h3>Dr. Elena Rostova</h3>
+                    <p class="role">Director - Innovation Hub</p>
+                    <p class="qual">Ph.D. Cloud Systems (Oxford)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admissions Section -->
+        <section id="admissions" class="section">
+            <div class="section-header">
+                <span class="section-tag">Enrollment</span>
+                <h2>Admissions 2026</h2>
+            </div>
+            <div class="admissions-card glass-card">
+                <div class="adm-steps">
+                    <div class="step">
+                        <span class="step-num">1</span>
+                        <h4>Online Registration</h4>
+                        <p>Submit basic academic details & transcripts.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">2</span>
+                        <h4>Entrance Evaluation</h4>
+                        <p>Appear for Merit Scholarship Test.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">3</span>
+                        <h4>Counseling & Seat Allocation</h4>
+                        <p>Select department preference & confirm seat.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events" class="section">
+            <div class="section-header">
+                <span class="section-tag">Campus Life</span>
+                <h2>Upcoming Events</h2>
+            </div>
+            <div class="grid-3-col">
+                <div class="event-card glass-card">
+                    <span class="event-date">AUG 25</span>
+                    <h3>HackAURA 2026 Hackathon</h3>
+                    <p>36-Hour continuous web application & security hacking competition.</p>
+                </div>
+                <div class="event-card glass-card">
+                    <span class="event-date">SEP 10</span>
+                    <h3>International Tech Symposium</h3>
+                    <p>Keynote lectures by industry experts from Google & DeepMind.</p>
+                </div>
+                <div class="event-card glass-card">
+                    <span class="event-date">OCT 05</span>
+                    <h3>Annual Cultural & Tech Fest</h3>
+                    <p>3 days of music, robotics, gaming competitions, and live performances.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="section">
+            <div class="section-header">
+                <span class="section-tag">Visual Tour</span>
+                <h2>Campus Gallery</h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-caption="Advanced Robotics Laboratory">
+                    <div class="gallery-placeholder p1">🤖 Robotics Lab</div>
+                </div>
+                <div class="gallery-item" data-caption="Central Tech Library">
+                    <div class="gallery-placeholder p2">📚 Tech Library</div>
+                </div>
+                <div class="gallery-item" data-caption="High Performance Computing Center">
+                    <div class="gallery-placeholder p3">💻 HPC Supercomputing</div>
+                </div>
+                <div class="gallery-item" data-caption="Modern Auditorium">
+                    <div class="gallery-placeholder p4">🎭 Auditorium</div>
+                </div>
+                <div class="gallery-item" data-caption="Sports Complex & Gymnasium">
+                    <div class="gallery-placeholder p5">⚽ Sports Complex</div>
+                </div>
+                <div class="gallery-item" data-caption="Green Campus Quadrangle">
+                    <div class="gallery-placeholder p6">🌱 Campus Quad</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Placements Section -->
+        <section id="placements" class="section">
+            <div class="section-header">
+                <span class="section-tag">Careers</span>
+                <h2>Placement Highlights</h2>
+            </div>
+            <div class="stats-row">
+                <div class="stat-box glass-card">
+                    <span class="s-val">98.4%</span>
+                    <span class="s-lbl">Placement Rate</span>
+                </div>
+                <div class="stat-box glass-card">
+                    <span class="s-val">44 LPA</span>
+                    <span class="s-lbl">Highest Package</span>
+                </div>
+                <div class="stat-box glass-card">
+                    <span class="s-val">12.5 LPA</span>
+                    <span class="s-lbl">Average Package</span>
+                </div>
+                <div class="stat-box glass-card">
+                    <span class="s-val">150+</span>
+                    <span class="s-lbl">Recruiting Partners</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="section-header">
+                <span class="section-tag">Get in Touch</span>
+                <h2>Contact Us</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info glass-card">
+                    <h3>Contact Information</h3>
+                    <p>📍 100 University Drive, Tech City, NY 10001</p>
+                    <p>📧 info@auratech.edu</p>
+                    <p>📱 +1 (800) 555-AURA</p>
+                </div>
+                <form class="contact-form glass-card" id="collegeContactForm">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea rows="4" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn primary-btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 AURA Institute of Technology. All Rights Reserved. Built for Web Technology Laboratory Experiments.</p>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" class="back-to-top-btn" aria-label="Back to Top">↑</button>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="lightbox-modal">
+        <span class="close-lightbox" id="closeLightbox">&times;</span>
+        <div class="lightbox-content" id="lightboxContent"></div>
+        <p id="lightboxCaption" class="lightbox-caption"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 10 - Interactive Debugging Demonstration</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    <div class="bg-blur bg-blur-1"></div>
+    <div class="bg-blur bg-blur-2"></div>
+
+    <main class="debug-container container">
+        <header class="app-header">
+            <div>
+                <span class="badge">Experiment 10</span>
+                <h1>Interactive Web Debugging Lab</h1>
+                <p class="subtitle">Demonstration of HTML, CSS & JavaScript runtime errors, simulated DevTools console, and bug fixes.</p>
+            </div>
+            <button id="themeToggleBtn" class="theme-btn" aria-label="Toggle Theme">🌙</button>
+        </header>
+
+        <!-- Mode Selector Switcher -->
+        <div class="mode-switcher-card glass-card">
+            <div class="mode-info">
+                <span>Current Environment Mode:</span>
+                <strong id="modeLabel" class="mode-status broken">BROKEN CODE MODE (ERRORS ACTIVE)</strong>
+            </div>
+            <div class="btn-group">
+                <button id="setBrokenModeBtn" class="btn danger-btn active">🔴 Load Broken Code View</button>
+                <button id="setFixedModeBtn" class="btn success-btn">🟢 Load Corrected Code View</button>
+            </div>
+        </div>
+
+        <div class="debug-grid">
+            <!-- Left Side: Interactive Demo App View -->
+            <section class="demo-viewport glass-card">
+                <div class="viewport-header">
+                    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    <span class="viewport-title">Live Preview Sandbox</span>
+                </div>
+
+                <div id="sandboxArea" class="sandbox-area">
+                    <!-- HTML / CSS / JS Demo Rendered Here -->
+                    <div id="buggyContainer" class="buggy-wrapper">
+                        <h2>Dhiyanshu's Grade Calculator (Sandbox Demo)</h2>
+                        <p>Enter marks for Reg No 192421056 (B.Tech IT):</p>
+                        
+                        <div class="input-row">
+                            <label for="studentMarkInput">Score (0-100):</label>
+                            <input type="text" id="studentMarkInput" value="85">
+                        </div>
+
+                        <!-- Button with deliberate JS error call in broken mode -->
+                        <button id="triggerCalcBtn" class="btn primary-btn">Calculate Grade</button>
+                        <button id="triggerErrorBtn" class="btn danger-btn">Trigger Uncaught Type Exception</button>
+
+                        <div id="calcOutput" class="output-card">Result will appear here...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Side: Simulated DevTools Console & Inspector -->
+            <aside class="console-viewport glass-card">
+                <div class="console-header">
+                    <div class="tab-group">
+                        <button class="console-tab active" data-tab="consoleTab">📟 Console Logs</button>
+                        <button class="console-tab" data-tab="explanationTab">🔍 Bug Explanations</button>
+                        <button class="console-tab" data-tab="guideTab">📖 DevTools Guide</button>
+                    </div>
+                    <button id="clearConsoleBtn" class="text-btn">Clear Logs</button>
+                </div>
+
+                <!-- Tab 1: Simulated Console Output Window -->
+                <div id="consoleTab" class="tab-content active">
+                    <div id="consoleOutputList" class="console-output-list">
+                        <!-- Populated dynamically via JS console proxy -->
+                    </div>
+                </div>
+
+                <!-- Tab 2: Bug Explanations -->
+                <div id="explanationTab" class="tab-content">
+                    <div class="explanation-list">
+                        <div class="bug-card">
+                            <span class="bug-tag html">HTML Error</span>
+                            <h4>Duplicate Element IDs & Unclosed Tags</h4>
+                            <p><strong>Bug:</strong> Multiple elements sharing id="studentMarkInput" and unclosed &lt;div&gt; tags.</p>
+                            <p><strong>Fix:</strong> Enforce unique ID attributes and properly close all HTML5 semantic tags.</p>
+                        </div>
+
+                        <div class="bug-card">
+                            <span class="bug-tag css">CSS Error</span>
+                            <h4>Broken Flexbox Property & Missing Units</h4>
+                            <p><strong>Bug:</strong> Invalid CSS declaration <code>display: inline-flexbox; width: 100;</code> without 'px'.</p>
+                            <p><strong>Fix:</strong> Correct CSS syntax to <code>display: flex; width: 100%;</code> with explicit dimension units.</p>
+                        </div>
+
+                        <div class="bug-card">
+                            <span class="bug-tag js">JavaScript Error</span>
+                            <h4>TypeError: Cannot read property of undefined</h4>
+                            <p><strong>Bug:</strong> Invoking <code>document.getElementById('wrongID').value</code> on a non-existent element returns null.</p>
+                            <p><strong>Fix:</strong> Use null checks & verify element IDs before dereferencing properties.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: DevTools Guide -->
+                <div id="guideTab" class="tab-content">
+                    <div class="guide-box">
+                        <h3>🛠️ Developer Tools & Debugging Walkthrough</h3>
+                        <ol class="guide-steps">
+                            <li><strong>Open DevTools:</strong> Press <kbd>F12</kbd> or <kbd>Ctrl + Shift + I</kbd> (<kbd>Cmd + Option + I</kbd> on Mac).</li>
+                            <li><strong>Console Tab:</strong> View runtime errors, warnings, and execute test expressions live.</li>
+                            <li><strong>Breakpoints:</strong> Open the <em>Sources</em> tab, click line numbers in JS files to set breakpoints, and step through code execution (<kbd>F10</kbd> Step Over, <kbd>F11</kbd> Step Into).</li>
+                            <li><strong>Try...Catch Blocks:</strong> Wrap suspicious code blocks to gracefully catch and handle exceptions without crashing the script.</li>
+                        </ol>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

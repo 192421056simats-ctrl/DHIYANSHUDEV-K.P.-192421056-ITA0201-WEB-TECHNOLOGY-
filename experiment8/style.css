@@ -1,0 +1,233 @@
+/* ==========================================================================
+   EXPERIMENT 8: DIGITAL CLOCK & EXAMINATION COUNTDOWN
+   ========================================================================== */
+
+:root {
+    --bg-main: #090d16;
+    --bg-card: rgba(18, 26, 43, 0.8);
+    --bg-card-border: rgba(255, 255, 255, 0.1);
+    
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --text-heading: #ffffff;
+    
+    --accent-primary: #6366f1;
+    --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    
+    --radius-lg: 24px;
+    --radius-md: 14px;
+    --radius-sm: 8px;
+    
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.light-theme {
+    --bg-main: #f1f5f9;
+    --bg-card: rgba(255, 255, 255, 0.9);
+    --bg-card-border: rgba(99, 102, 241, 0.15);
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --text-heading: #0f172a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    padding: 2.5rem 1rem;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.bg-blur {
+    position: fixed; border-radius: 50%; filter: blur(130px); z-index: 0; pointer-events: none; opacity: 0.5;
+}
+.bg-blur-1 { width: 400px; height: 400px; background: #6366f1; top: -100px; left: -100px; }
+.bg-blur-2 { width: 450px; height: 450px; background: #a855f7; bottom: -150px; right: -100px; }
+
+.container { max-width: 900px; margin: 0 auto; z-index: 1; position: relative; }
+.text-center { text-align: center; }
+.hidden { display: none !important; }
+
+.app-header { margin-bottom: 2rem; position: relative; }
+
+.theme-btn {
+    position: absolute;
+    top: 0; right: 0;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--bg-card-border);
+    color: var(--text-main);
+    width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.1rem;
+}
+
+.badge {
+    background: var(--accent-gradient); color: #fff; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 999px; display: inline-block; margin-bottom: 0.5rem;
+}
+
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--bg-card-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
+.clocks-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.card-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+
+.digital-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+}
+
+.digital-date {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.timezone-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    background: rgba(99, 102, 241, 0.15);
+    color: var(--accent-primary);
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.canvas-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Countdown Section */
+.countdown-section {
+    text-align: center;
+}
+
+.countdown-section h2 { font-size: 1.4rem; margin-bottom: 0.2rem; }
+.countdown-section p { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 2rem; }
+
+.countdown-display-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.time-block {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--bg-card-border);
+    padding: 1.25rem 1.8rem;
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cd-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--accent-primary);
+}
+
+.cd-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.timer-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: center;
+}
+
+.preset-group {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+select {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--bg-card-border);
+    color: var(--text-main);
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.btn-group {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn {
+    padding: 0.75rem 1.4rem;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 0.88rem;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.primary-btn { background: var(--accent-gradient); color: #fff; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4); }
+.secondary-btn { background: rgba(255, 255, 255, 0.08); color: var(--text-main); border: 1px solid var(--bg-card-border); }
+.danger-btn { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+.alarm-btn { background: rgba(168, 85, 247, 0.2); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.3); }
+
+/* Alarm Modal */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
+    display: none; align-items: center; justify-content: center; z-index: 2000;
+}
+.modal-overlay.active { display: flex; }
+.alarm-bell { font-size: 4rem; animation: ring 0.5s infinite alternate; }
+
+@keyframes ring {
+    0% { transform: rotate(-15deg); }
+    100% { transform: rotate(15deg); }
+}
+
+@media (max-width: 768px) {
+    .clocks-grid { grid-template-columns: 1fr; }
+    .countdown-display-grid { gap: 0.5rem; }
+    .time-block { padding: 1rem; }
+    .cd-num { font-size: 2rem; }
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 7 - Online Quiz Application</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    <div class="bg-blur bg-blur-1"></div>
+    <div class="bg-blur bg-blur-2"></div>
+
+    <main class="quiz-container container">
+        <!-- Start Screen -->
+        <div id="startScreen" class="glass-card text-center">
+            <span class="quiz-badge">Experiment 7</span>
+            <h1>Web Technology & CS Mastery Quiz</h1>
+            <p class="quiz-desc">Test your knowledge across 20 comprehensive multiple-choice questions covering HTML5, CSS3, ES6+ JavaScript, DOM & Web Architecture.</p>
+
+            <div class="quiz-rules">
+                <div class="rule-item">⏱️ <strong>Time Limit:</strong> 15 Minutes</div>
+                <div class="rule-item">❓ <strong>Total Questions:</strong> 20 MCQs</div>
+                <div class="rule-item">🎯 <strong>Pass Threshold:</strong> 70%</div>
+            </div>
+
+            <button id="startQuizBtn" class="btn primary-btn btn-lg">Start Quiz Now</button>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quizScreen" class="quiz-screen glass-card hidden">
+            <!-- Top Bar (Header, Timer, Progress) -->
+            <header class="quiz-header">
+                <div>
+                    <span class="quiz-badge">Question <span id="currentQuestionNum">1</span> of 20</span>
+                    <h2 class="category-title">Web Development & CS</h2>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-icon">⏳</span>
+                    <span id="timerDisplay" class="timer-text">15:00</span>
+                </div>
+            </header>
+
+            <!-- Overall Quiz Progress Bar -->
+            <div class="progress-bar-bg">
+                <div id="quizProgressFill" class="progress-fill" style="width: 5%;"></div>
+            </div>
+
+            <div class="quiz-body-layout">
+                <!-- Question & Options Area -->
+                <div class="question-main-area">
+                    <h3 id="questionText" class="question-text">Loading question...</h3>
+
+                    <div id="optionsContainer" class="options-grid">
+                        <!-- Options generated via JS -->
+                    </div>
+
+                    <!-- Navigation Action Controls -->
+                    <div class="quiz-controls">
+                        <button id="prevBtn" class="btn secondary-btn" disabled>← Previous</button>
+                        <button id="clearOptionBtn" class="btn text-btn">Clear Choice</button>
+                        <button id="nextBtn" class="btn primary-btn">Next Question →</button>
+                        <button id="submitQuizBtn" class="btn success-btn hidden">Submit Quiz</button>
+                    </div>
+                </div>
+
+                <!-- Question Review Palette Matrix -->
+                <aside class="palette-sidebar">
+                    <h4>Question Palette</h4>
+                    <div id="questionPalette" class="palette-grid">
+                        <!-- 20 Question Pills generated via JS -->
+                    </div>
+                    <div class="palette-legend">
+                        <span class="legend-item"><span class="pill-dot answered"></span> Answered</span>
+                        <span class="legend-item"><span class="pill-dot current"></span> Current</span>
+                        <span class="legend-item"><span class="pill-dot unvisited"></span> Unanswered</span>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <!-- Result Overview Screen -->
+        <div id="resultScreen" class="result-screen glass-card hidden">
+            <div class="result-header text-center">
+                <div id="scoreTrophyIcon" class="trophy-icon">🏆</div>
+                <h1 id="resultTitle">Quiz Completed!</h1>
+                <p id="resultSubtitle">Here is your performance summary.</p>
+            </div>
+
+            <!-- Score Cards -->
+            <div class="score-cards-grid">
+                <div class="score-card">
+                    <span class="sc-label">Total Score</span>
+                    <span id="finalScoreVal" class="sc-val">18 / 20</span>
+                </div>
+                <div class="score-card">
+                    <span class="sc-label">Percentage</span>
+                    <span id="percentageVal" class="sc-val">90%</span>
+                </div>
+                <div class="score-card">
+                    <span class="sc-label">Correct Answers</span>
+                    <span id="correctAnswersVal" class="sc-val text-success">18</span>
+                </div>
+                <div class="score-card">
+                    <span class="sc-label">Wrong / Skipped</span>
+                    <span id="wrongAnswersVal" class="sc-val text-danger">2</span>
+                </div>
+            </div>
+
+            <!-- Question Review Breakdown -->
+            <div class="review-section">
+                <h2>Detailed Question Review & Explanations</h2>
+                <div id="reviewList" class="review-list">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <div class="result-actions">
+                <button id="restartQuizBtn" class="btn primary-btn">Restart Quiz</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

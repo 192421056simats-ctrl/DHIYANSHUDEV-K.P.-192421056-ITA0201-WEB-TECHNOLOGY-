@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 3 - Interactive Scientific Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    <div class="bg-blur bg-blur-1"></div>
+    <div class="bg-blur bg-blur-2"></div>
+
+    <main class="calculator-app">
+        <!-- Main Calculator Layout -->
+        <div class="calc-container glass-card">
+            <!-- Header Bar -->
+            <header class="calc-header">
+                <div class="brand">
+                    <span class="calc-badge">Exp 3</span>
+                    <h1>Scientific Calculator</h1>
+                </div>
+                <div class="header-actions">
+                    <button id="toggleHistoryBtn" class="action-btn" title="Toggle History Panel">📜 History</button>
+                    <button id="themeToggleBtn" class="action-btn" title="Toggle Theme">🌙</button>
+                </div>
+            </header>
+
+            <!-- Display Area -->
+            <div class="calc-display-wrapper">
+                <div class="mode-indicators">
+                    <span id="degRadMode" class="indicator active" title="Click to toggle DEG/RAD">DEG</span>
+                    <span id="memoryIndicator" class="indicator memory-badge hidden">M</span>
+                </div>
+                <div id="previousExpression" class="previous-expr"></div>
+                <div id="currentDisplay" class="current-display">0</div>
+            </div>
+
+            <!-- Memory Bar -->
+            <div class="memory-bar">
+                <button class="mem-btn" data-action="mc">MC</button>
+                <button class="mem-btn" data-action="mr">MR</button>
+                <button class="mem-btn" data-action="m-plus">M+</button>
+                <button class="mem-btn" data-action="m-minus">M-</button>
+            </div>
+
+            <!-- Keypad CSS Grid Layout -->
+            <div class="keypad-grid">
+                <!-- Row 1: Scientific Functions -->
+                <button class="btn fn-btn" data-func="degRad">DEG/RAD</button>
+                <button class="btn fn-btn" data-func="sin">sin</button>
+                <button class="btn fn-btn" data-func="cos">cos</button>
+                <button class="btn fn-btn" data-func="tan">tan</button>
+                <button class="btn danger-btn" data-action="clear">AC</button>
+                <button class="btn danger-btn" data-action="delete">DEL</button>
+
+                <!-- Row 2: Scientific Functions -->
+                <button class="btn fn-btn" data-func="log">log</button>
+                <button class="btn fn-btn" data-func="ln">ln</button>
+                <button class="btn fn-btn" data-func="sqrt">√x</button>
+                <button class="btn fn-btn" data-func="square">x²</button>
+                <button class="btn fn-btn" data-func="cube">x³</button>
+                <button class="btn op-btn" data-op="/">÷</button>
+
+                <!-- Row 3: Advanced Math -->
+                <button class="btn fn-btn" data-func="power">x^y</button>
+                <button class="btn fn-btn" data-func="factorial">n!</button>
+                <button class="btn num-btn" data-num="7">7</button>
+                <button class="btn num-btn" data-num="8">8</button>
+                <button class="btn num-btn" data-num="9">9</button>
+                <button class="btn op-btn" data-op="*">×</button>
+
+                <!-- Row 4: Math Utilities -->
+                <button class="btn fn-btn" data-func="abs">|x|</button>
+                <button class="btn fn-btn" data-func="percent">%</button>
+                <button class="btn num-btn" data-num="4">4</button>
+                <button class="btn num-btn" data-num="5">5</button>
+                <button class="btn num-btn" data-num="6">6</button>
+                <button class="btn op-btn" data-op="-">-</button>
+
+                <!-- Row 5: Rounding & Constants -->
+                <button class="btn fn-btn" data-func="floor">floor</button>
+                <button class="btn fn-btn" data-func="ceil">ceil</button>
+                <button class="btn num-btn" data-num="1">1</button>
+                <button class="btn num-btn" data-num="2">2</button>
+                <button class="btn num-btn" data-num="3">3</button>
+                <button class="btn op-btn" data-op="+">+</button>
+
+                <!-- Row 6: Rounding, Constants & Equals -->
+                <button class="btn fn-btn" data-func="round">round</button>
+                <button class="btn fn-btn" data-func="random">rand</button>
+                <button class="btn num-btn" data-func="pi">π</button>
+                <button class="btn num-btn" data-func="e">e</button>
+                <button class="btn num-btn" data-num="0">0</button>
+                <button class="btn num-btn" data-num=".">.</button>
+                <button class="btn fn-btn" data-op="%">mod</button>
+                <button class="btn equals-btn span-2" data-action="equals">=</button>
+            </div>
+        </div>
+
+        <!-- History Side Panel -->
+        <aside id="historyPanel" class="history-panel glass-card hidden">
+            <div class="history-header">
+                <h3>Calculation History</h3>
+                <button id="clearHistoryBtn" class="text-btn">Clear All</button>
+            </div>
+            <div id="historyList" class="history-list">
+                <p class="empty-msg">No calculation history yet.</p>
+            </div>
+        </aside>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
