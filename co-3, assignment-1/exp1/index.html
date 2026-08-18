@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration & Profile Preview | Exp 1</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Banner -->
+        <header class="main-header">
+            <div class="badge">CO3 - Experiment 1</div>
+            <h1>Student Registration Portal</h1>
+            <p class="subtitle">Enter details to generate an instant, dynamic profile preview using DOM manipulation</p>
+        </header>
+
+        <!-- Content Layout Grid -->
+        <main class="content-grid">
+            <!-- Registration Form Section -->
+            <section class="card form-card">
+                <div class="card-header">
+                    <h2><span class="icon">📝</span> Student Details Form</h2>
+                    <span class="status-indicator">Live Preview Ready</span>
+                </div>
+
+                <form id="registrationForm" novalidate>
+                    <div class="form-group">
+                        <label for="studentName">Student Full Name <span class="required">*</span></label>
+                        <input type="text" id="studentName" placeholder="e.g. Alex Johnson" required autocomplete="off">
+                        <span class="error-msg" id="nameError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regNumber">Register Number <span class="required">*</span></label>
+                        <input type="text" id="regNumber" placeholder="e.g. 21CS045" required autocomplete="off">
+                        <span class="error-msg" id="regError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department">Department <span class="required">*</span></label>
+                        <select id="department" required>
+                            <option value="" disabled selected>Select Department</option>
+                            <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Electronics & Communication">Electronics & Communication</option>
+                            <option value="Electrical & Electronics">Electrical & Electronics</option>
+                            <option value="Mechanical Engineering">Mechanical Engineering</option>
+                            <option value="Artificial Intelligence & Data Science">Artificial Intelligence & Data Science</option>
+                        </select>
+                        <span class="error-msg" id="deptError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="yearOfStudy">Year of Study <span class="required">*</span></label>
+                        <select id="yearOfStudy" required>
+                            <option value="" disabled selected>Select Year</option>
+                            <option value="1st Year (Freshman)">1st Year (Freshman)</option>
+                            <option value="2nd Year (Sophomore)">2nd Year (Sophomore)</option>
+                            <option value="3rd Year (Junior)">3rd Year (Junior)</option>
+                            <option value="4th Year (Senior)">4th Year (Senior)</option>
+                        </select>
+                        <span class="error-msg" id="yearError"></span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="displayBtn" class="btn btn-primary">
+                            <span class="btn-icon">✨</span> Generate Profile Preview
+                        </button>
+                        <button type="button" id="resetBtn" class="btn btn-secondary">
+                            Reset Form
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Profiles Display Section -->
+            <section class="card profiles-card">
+                <div class="card-header">
+                    <h2><span class="icon">🎓</span> Formatted Student Profiles</h2>
+                    <span id="profileCount" class="count-badge">0 Profiles</span>
+                </div>
+
+                <!-- Container where profile cards will be injected dynamically -->
+                <div id="profileContainer" class="profiles-container">
+                    <div id="emptyState" class="empty-state">
+                        <div class="empty-icon">📂</div>
+                        <h3>No Profiles Generated Yet</h3>
+                        <p>Fill out the form on the left and click "Generate Profile Preview" to create dynamic student cards.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <p>Web Technology Lab • CO3 Assessment 1 • Dynamic DOM Manipulation Demo</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
