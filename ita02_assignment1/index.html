@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ITA02 Web Technology Assignment 1 | University Registration Portal</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+
+    <!-- Main Application Shell -->
+    <div id="wrapper">
+        
+        <!-- Header Section -->
+        <div id="header">
+            <div class="header-top">
+                <span class="univ-badge">Apex University of Technology</span>
+                <span class="course-badge">Course Code: ITA02 | Assignment 1</span>
+            </div>
+            <h1>University Course Registration Portal</h1>
+            <p class="tagline">Official Semester Course Enrollment &amp; Academic Credit Calculator</p>
+        </div>
+
+        <!-- Navigation Bar -->
+        <div id="navbar">
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#instructions">Instructions</a></li>
+                <li><a href="#courses">Available Courses</a></li>
+                <li><a href="#registration">Registration Form</a></li>
+                <li><a href="#contact">Contact Support</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div id="main-content">
+            
+            <!-- Home Section -->
+            <div id="home" class="section-card">
+                <h2><span>🏛️</span> Welcome to Student Registration</h2>
+                <p>
+                    Welcome to the <strong>Apex University Online Course Registration Portal</strong>. 
+                    This portal allows undergraduate students to select their semester courses, review credit distributions, 
+                    and dynamically generate their official registration summary before submitting.
+                </p>
+                <div class="student-info-box">
+                    <strong>Assignment Author:</strong> Dhiyanshu Dev K.P. &nbsp;|&nbsp; 
+                    <strong>Register Number:</strong> 192421056 &nbsp;|&nbsp; 
+                    <strong>Programme:</strong> B.E / B.Tech (ITA02)
+                </div>
+            </div>
+
+            <!-- Instructions Section (Lists & Hyperlinks Requirement) -->
+            <div id="instructions" class="section-card">
+                <h2><span>📋</span> Registration Guidelines &amp; Prerequisites</h2>
+                <div class="instructions-grid">
+                    <div class="instruction-box">
+                        <h3>General Guidelines:</h3>
+                        <ol>
+                            <li>Ensure all personal details match your official university identity records.</li>
+                            <li>Students must register for a minimum of <strong>3 credits</strong> and a maximum of <strong>24 credits</strong> per semester.</li>
+                            <li>Verify course prerequisites before selecting advanced theory subjects.</li>
+                            <li>For detailed academic regulations, refer to the <a href="https://www.ugc.gov.in" target="_blank" class="external-link">UGC Academic Guidelines 🔗</a>.</li>
+                        </ol>
+                    </div>
+
+                    <div class="instruction-box">
+                        <h3>Important Links:</h3>
+                        <ul class="link-list">
+                            <li><a href="#courses">View Available Semester Courses ↓</a></li>
+                            <li><a href="#registration">Proceed to Registration Form ↓</a></li>
+                            <li><a href="https://nptel.ac.in" target="_blank" class="external-link">NPTEL Online Certifications 🔗</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Available Courses Section (Table Requirement) -->
+            <div id="courses" class="section-card">
+                <h2><span>📚</span> Available Semester Courses</h2>
+                <p class="subtitle-text">Review the course code, credit weighting, and type before finalizing your choices.</p>
+                
+                <div class="table-responsive">
+                    <table class="course-table">
+                        <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th>Course Code</th>
+                                <th>Course Name</th>
+                                <th>Credits</th>
+                                <th>Course Type</th>
+                                <th>Faculty In-Charge</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="tbl-check">✓</span></td>
+                                <td><code>ITA02</code></td>
+                                <td><strong>Web Technology</strong></td>
+                                <td><span class="credit-tag">4 Credits</span></td>
+                                <td><span class="type-badge theory">Theory</span></td>
+                                <td>Dr. Arun Kumar</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tbl-check">✓</span></td>
+                                <td><code>CS302</code></td>
+                                <td><strong>Artificial Intelligence</strong></td>
+                                <td><span class="credit-tag">4 Credits</span></td>
+                                <td><span class="type-badge theory">Theory</span></td>
+                                <td>Dr. Meena Sharma</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tbl-check">✓</span></td>
+                                <td><code>ITA04</code></td>
+                                <td><strong>Web Technology Laboratory</strong></td>
+                                <td><span class="credit-tag">2 Credits</span></td>
+                                <td><span class="type-badge practical">Practical</span></td>
+                                <td>Dr. Ravi Verma</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tbl-check">✓</span></td>
+                                <td><code>CS304</code></td>
+                                <td><strong>Machine Learning</strong></td>
+                                <td><span class="credit-tag">4 Credits</span></td>
+                                <td><span class="type-badge theory">Theory</span></td>
+                                <td>Dr. Priya Sundaram</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tbl-check">✓</span></td>
+                                <td><code>IT305</code></td>
+                                <td><strong>Database Management Systems</strong></td>
+                                <td><span class="credit-tag">3 Credits</span></td>
+                                <td><span class="type-badge theory">Theory</span></td>
+                                <td>Dr. Suresh Kumar</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tbl-check">✓</span></td>
+                                <td><code>CS306</code></td>
+                                <td><strong>Cloud Computing Architecture</strong></td>
+                                <td><span class="credit-tag">3 Credits</span></td>
+                                <td><span class="type-badge theory">Theory</span></td>
+                                <td>Dr. Anitha Lakshmi</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Registration Form Section -->
+            <div id="registration" class="section-card">
+                <h2><span>✍️</span> Student Course Registration Form</h2>
+                <p class="subtitle-text">Fill in your basic information and select the courses you wish to enroll in.</p>
+                
+                <form id="registrationForm" action="#" method="post" novalidate="novalidate">
+                    
+                    <div class="form-grid">
+                        <!-- Register Number -->
+                        <div class="form-group">
+                            <label for="regNumber">Register Number <span class="req">*</span></label>
+                            <input type="text" id="regNumber" name="regNumber" value="192421056" placeholder="e.g. 192421056" required="required" />
+                            <span class="err-msg" id="regNumErr"></span>
+                        </div>
+
+                        <!-- Student Name -->
+                        <div class="form-group">
+                            <label for="studentName">Student Full Name <span class="req">*</span></label>
+                            <input type="text" id="studentName" name="studentName" value="Dhiyanshu Dev K.P." placeholder="e.g. Dhiyanshu Dev K.P." required="required" />
+                            <span class="err-msg" id="nameErr"></span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="studentEmail">Email Address <span class="req">*</span></label>
+                            <input type="email" id="studentEmail" name="studentEmail" value="dhiyanshu.dev@apex.edu.in" placeholder="e.g. dhiyanshu.dev@apex.edu.in" required="required" />
+                            <span class="err-msg" id="emailErr"></span>
+                        </div>
+
+                        <!-- Department -->
+                        <div class="form-group">
+                            <label for="department">Department <span class="req">*</span></label>
+                            <select id="department" name="department" required="required">
+                                <option value="" disabled="disabled">-- Select Department --</option>
+                                <option value="Information Technology" selected="selected">Information Technology</option>
+                                <option value="Computer Science &amp; Engineering">Computer Science &amp; Engineering</option>
+                                <option value="Artificial Intelligence &amp; Data Science">Artificial Intelligence &amp; Data Science</option>
+                                <option value="Electronics &amp; Communication">Electronics &amp; Communication</option>
+                            </select>
+                            <span class="err-msg" id="deptErr"></span>
+                        </div>
+
+                        <!-- Semester -->
+                        <div class="form-group">
+                            <label for="semester">Semester (1 to 8) <span class="req">*</span></label>
+                            <input type="number" id="semester" name="semester" min="1" max="8" value="5" placeholder="e.g. 5" required="required" />
+                            <span class="err-msg" id="semErr"></span>
+                        </div>
+                    </div>
+
+                    <!-- Course Selection Checkboxes -->
+                    <div class="course-selection-box">
+                        <h3><span>☑️</span> Course Selection (Select at least one) <span class="req">*</span></h3>
+                        <span class="err-msg" id="courseErr"></span>
+
+                        <div class="checkbox-grid">
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="selectedCourses" value="ITA02" checked="checked" />
+                                <div class="card-content">
+                                    <span class="c-code">ITA02</span>
+                                    <span class="c-name">Web Technology</span>
+                                    <span class="c-credits">4 Credits • Theory</span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="selectedCourses" value="CS302" checked="checked" />
+                                <div class="card-content">
+                                    <span class="c-code">CS302</span>
+                                    <span class="c-name">Artificial Intelligence</span>
+                                    <span class="c-credits">4 Credits • Theory</span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="selectedCourses" value="ITA04" checked="checked" />
+                                <div class="card-content">
+                                    <span class="c-code">ITA04</span>
+                                    <span class="c-name">Web Technology Laboratory</span>
+                                    <span class="c-credits">2 Credits • Practical</span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="selectedCourses" value="CS304" />
+                                <div class="card-content">
+                                    <span class="c-code">CS304</span>
+                                    <span class="c-name">Machine Learning</span>
+                                    <span class="c-credits">4 Credits • Theory</span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="selectedCourses" value="IT305" />
+                                <div class="card-content">
+                                    <span class="c-code">IT305</span>
+                                    <span class="c-name">Database Management Systems</span>
+                                    <span class="c-credits">3 Credits • Theory</span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="selectedCourses" value="CS306" />
+                                <div class="card-content">
+                                    <span class="c-code">CS306</span>
+                                    <span class="c-name">Cloud Computing Architecture</span>
+                                    <span class="c-credits">3 Credits • Theory</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Submit & Reset Buttons -->
+                    <div class="form-actions">
+                        <button type="submit" id="submitBtn" class="btn btn-primary">
+                            <span>🚀</span> Generate Registration Summary
+                        </button>
+                        <button type="button" id="resetBtn" class="btn btn-secondary">
+                            Reset Form
+                        </button>
+                    </div>
+
+                </form>
+
+                <!-- Dynamic Registration Summary Output Container -->
+                <div id="summaryContainer" class="summary-container hidden">
+                    <!-- JavaScript dynamically populates summary card here -->
+                </div>
+
+            </div>
+
+            <!-- Contact Section -->
+            <div id="contact" class="section-card">
+                <h2><span>📞</span> Contact Academic Support</h2>
+                <p>If you encounter any registration issues, please reach out to the academic office:</p>
+                <div class="contact-details">
+                    <p><strong>Email:</strong> <a href="mailto:academic.office@apex.edu.in">academic.office@apex.edu.in</a></p>
+                    <p><strong>Helpdesk Phone:</strong> +91 (044) 2747-8000</p>
+                    <p><strong>Office Hours:</strong> Monday – Friday, 9:00 AM – 5:00 PM IST</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer & Code of Conduct Declaration -->
+        <div id="footer">
+            <div class="declaration-card">
+                <h3>Academic Integrity Code of Conduct</h3>
+                <p>
+                    I <strong>Dhiyanshu Dev K.P.</strong> (Reg. No: <strong>192421056</strong>) certify that this submission is my original work 
+                    and that I have adhered to the guidelines specified for this assessment. I understand that any violation of academic-integrity rules 
+                    will result in disciplinary action.
+                </p>
+                <div class="sig-row">
+                    <span><strong>Student Signature:</strong> <em>Dhiyanshu Dev K.P.</em></span>
+                    <span><strong>Date:</strong> 01-Sep-2026</span>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2026 Apex University • Course Code: ITA02 (Web Technology) • Assignment 1</p>
+        </div>
+
+    </div>
+
+    <!-- Script inclusion -->
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
