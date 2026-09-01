@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>High Enrollment Courses</title>
+        <style>
+                body {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    background-color: #f8fafc;
+                    color: #0f172a;
+                    padding: 2.5rem 1rem;
+                    display: flex;
+                    justify-content: center;
+                }
+                .container {
+                    width: 100%;
+                    max-width: 900px;
+                    background: #ffffff;
+                    border-radius: 16px;
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+                    border: 1px solid #e2e8f0;
+                    padding: 2rem;
+                }
+                h1 {
+                    font-size: 1.85rem;
+                    color: #1e293b;
+                    margin-bottom: 0.5rem;
+                }
+                p.subtitle {
+                    color: #64748b;
+                    font-size: 0.95rem;
+                    margin-bottom: 1.5rem;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 1rem;
+                }
+                th, td {
+                    padding: 0.85rem 1rem;
+                    text-align: left;
+                    border-bottom: 1px solid #e2e8f0;
+                }
+                th {
+                    background-color: #4f46e5;
+                    color: #ffffff;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+                tr:nth-child(even) {
+                    background-color: #f8fafc;
+                }
+                tr:hover {
+                    background-color: #f1f5f9;
+                }
+                .badge-theory {
+                    background: #e0e7ff;
+                    color: #4338ca;
+                    font-weight: 600;
+                    padding: 0.25rem 0.6rem;
+                    border-radius: 50px;
+                    font-size: 0.8rem;
+                }
+                .badge-practical {
+                    background: #fef3c7;
+                    color: #b45309;
+                    font-weight: 600;
+                    padding: 0.25rem 0.6rem;
+                    border-radius: 50px;
+                    font-size: 0.8rem;
+                }
+                .students-count {
+                    font-weight: 700;
+                    color: #0f172a;
+                }
+            </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>High Enrollment Courses</h1>
+            <p class="subtitle">Courses having more than 40 enrolled students, sorted in descending order of student enrollment.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course Code</th><th>Course Name</th><th>Faculty</th><th>Students</th><th>Credits</th><th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>AI302</code></td><td><strong>Artificial Intelligence</strong></td><td>Dr. Meena</td><td class="students-count">72</td><td>4</td><td><span class="badge-theory">Theory</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>ML304</code></td><td><strong>Machine Learning</strong></td><td>Dr. Priya</td><td class="students-count">64</td><td>4</td><td><span class="badge-theory">Theory</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>WEB301</code></td><td><strong>Web Technology</strong></td><td>Dr. Arun</td><td class="students-count">58</td><td>4</td><td><span class="badge-theory">Theory</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>DB305</code></td><td><strong>Database Systems</strong></td><td>Dr. Kumar</td><td class="students-count">42</td><td>3</td><td><span class="badge-theory">Theory</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

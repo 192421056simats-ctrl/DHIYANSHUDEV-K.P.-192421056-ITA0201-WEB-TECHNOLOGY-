@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CO4 AT-1 | Web Data Representation & XPath Lab</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Main Top Banner -->
+        <header class="main-header">
+            <div class="header-badges">
+                <span class="badge badge-primary">CO4 AT-1</span>
+                <span class="badge badge-accent">Unit IV - Representing Web Data</span>
+            </div>
+            <h1>University Course XML & XPath Workbench</h1>
+            <p class="subtitle">Interactive XML Editor, Live XPath Evaluator, Dynamic Record Addition, and XSLT Transformer</p>
+            
+            <!-- Navigation Tabs -->
+            <nav class="nav-tabs">
+                <button type="button" class="tab-btn active" data-tab="tab-crud">
+                    <span>✏️</span> XML Editor & Add Records
+                </button>
+                <button type="button" class="tab-btn" data-tab="tab-xpath">
+                    <span>🔍</span> Live XPath Evaluator
+                </button>
+                <button type="button" class="tab-btn" data-tab="tab-xslt">
+                    <span>📊</span> Live XSLT Renderer
+                </button>
+                <button type="button" class="tab-btn" data-tab="tab-solutions">
+                    <span>📑</span> CO4 AT-1 Solutions
+                </button>
+            </nav>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="tab-content-area">
+            
+            <!-- TAB 1: XML CRUD & Record Management -->
+            <section id="tab-crud" class="tab-pane active">
+                <div class="split-grid">
+                    <!-- Form to Add / Edit Record -->
+                    <div class="card editor-card">
+                        <div class="card-header">
+                            <h2 id="formTitle"><span>➕</span> Add New Course Record</h2>
+                            <span id="editModeBadge" class="mode-badge hidden">Edit Mode</span>
+                        </div>
+
+                        <form id="courseForm" novalidate>
+                            <input type="hidden" id="editCourseId" value="">
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="courseId">Course ID (Attribute) *</label>
+                                    <input type="text" id="courseId" placeholder="e.g. C106" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="courseCode">Course Code *</label>
+                                    <input type="text" id="courseCode" placeholder="e.g. CS306" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="courseName">Course Title / Name *</label>
+                                <input type="text" id="courseName" placeholder="e.g. Cloud Computing" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="facultyName">Faculty Name *</label>
+                                    <input type="text" id="facultyName" placeholder="e.g. Dr. Lakshmi" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="studentCount">Students Enrolled *</label>
+                                    <input type="number" id="studentCount" min="0" max="500" placeholder="e.g. 65" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="creditWeight">Credits *</label>
+                                    <input type="number" id="creditWeight" min="1" max="6" placeholder="e.g. 4" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="courseType">Course Type *</label>
+                                    <select id="courseType" required>
+                                        <option value="Theory" selected>Theory</option>
+                                        <option value="Practical">Practical</option>
+                                        <option value="Integrated">Integrated</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" id="saveCourseBtn" class="btn btn-primary">
+                                    <span>✨</span> Add Course to XML
+                                </button>
+                                <button type="button" id="cancelEditBtn" class="btn btn-secondary hidden">
+                                    Cancel Edit
+                                </button>
+                                <button type="button" id="resetXmlBtn" class="btn btn-danger">
+                                    Reset Sample XML
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- XML Table View & Code Preview -->
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <h2><span>📚</span> Current XML Courses Dataset</h2>
+                            <span id="recordCountBadge" class="count-badge">5 Records</span>
+                        </div>
+
+                        <!-- Table of courses -->
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                        <th>Faculty</th>
+                                        <th>Students</th>
+                                        <th>Credits</th>
+                                        <th>Type</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="xmlCourseTableBody">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Raw XML Code Accordion -->
+                        <div class="xml-code-view">
+                            <div class="code-view-header">
+                                <h3><span>📄</span> Raw XML Document</h3>
+                                <button type="button" id="copyXmlBtn" class="btn-sm">📋 Copy XML</button>
+                            </div>
+                            <pre><code id="rawXmlDisplay"></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: Live XPath Evaluator -->
+            <section id="tab-xpath" class="tab-pane">
+                <div class="card xpath-card">
+                    <div class="card-header">
+                        <h2><span>🔍</span> Interactive XPath Evaluator</h2>
+                        <span class="status-indicator">XPath 1.0 Ready</span>
+                    </div>
+
+                    <!-- Presets for Question 2 -->
+                    <div class="xpath-presets">
+                        <span class="preset-label">Assessment Query Presets:</span>
+                        <div class="preset-buttons">
+                            <button type="button" class="btn-preset" data-xpath="/courses/course">2a. All Courses</button>
+                            <button type="button" class="btn-preset" data-xpath="/courses/course/name">2b. Course Names</button>
+                            <button type="button" class="btn-preset" data-xpath="/courses/course[students > 50]">2c. Students &gt; 50</button>
+                            <button type="button" class="btn-preset" data-xpath="/courses/course[credits = 4]">2d. Credits = 4</button>
+                            <button type="button" class="btn-preset" data-xpath="/courses/course[type = 'Theory']">2e. Type = Theory</button>
+                            <button type="button" class="btn-preset" data-xpath="/courses/course[type = 'Theory' and students > 50]/name">2f. Theory &gt; 50 Names</button>
+                            <button type="button" class="btn-preset" data-xpath="/courses/course[credits >= 4]/faculty">2g. Faculty (Credits &ge; 4)</button>
+                            <button type="button" class="btn-preset" data-xpath="/courses/course[@id = 'C104']">2h. ID = C104</button>
+                            <button type="button" class="btn-preset" data-xpath="/courses/course[1]">2i. First Course</button>
+                            <button type="button" class="btn-preset" data-xpath="/courses/course[last()]">2j. Last Course</button>
+                        </div>
+                    </div>
+
+                    <!-- Custom Input Field -->
+                    <div class="xpath-input-group">
+                        <label for="xpathInput">Expression:</label>
+                        <input type="text" id="xpathInput" placeholder="e.g. /courses/course[students > 50]/name" value="/courses/course[students > 50]">
+                        <button type="button" id="evaluateXpathBtn" class="btn btn-primary">Evaluate XPath</button>
+                    </div>
+
+                    <!-- Evaluation Results -->
+                    <div class="xpath-result-container">
+                        <div class="result-header">
+                            <h3>Query Result Node Set</h3>
+                            <span id="xpathResultCount" class="result-badge">0 Matches</span>
+                        </div>
+
+                        <div id="xpathOutputView" class="xpath-output">
+                            <!-- Injected matched nodes -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: Live XSLT Transformation Renderer -->
+            <section id="tab-xslt" class="tab-pane">
+                <div class="card xslt-card">
+                    <div class="card-header">
+                        <h2><span>📊</span> XSLT Transformation Renderer</h2>
+                        <span class="status-indicator">XSLT 1.0 Simulation</span>
+                    </div>
+
+                    <!-- Controls for filtering and sorting -->
+                    <div class="xslt-controls">
+                        <div class="control-item">
+                            <label for="filterStudentsThreshold">Filter Threshold (Students &gt; X):</label>
+                            <input type="range" id="filterStudentsThreshold" min="0" max="100" value="40" step="5">
+                            <span id="thresholdValDisplay" class="val-tag">40</span>
+                        </div>
+
+                        <div class="control-item">
+                            <label for="sortOrderSelect">Sort Order:</label>
+                            <select id="sortOrderSelect">
+                                <option value="students-desc" selected>Students (Descending)</option>
+                                <option value="students-asc">Students (Ascending)</option>
+                                <option value="credits-desc">Credits (Descending)</option>
+                                <option value="code-asc">Course Code (A - Z)</option>
+                            </select>
+                        </div>
+
+                        <button type="button" id="applyXsltBtn" class="btn btn-primary">Transform XML</button>
+                    </div>
+
+                    <!-- Rendered HTML Table Container -->
+                    <div id="xsltRenderOutput" class="xslt-render-box">
+                        <!-- Transformed table -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: Solution Guide -->
+            <section id="tab-solutions" class="tab-pane">
+                <div class="card solutions-card">
+                    <div class="card-header">
+                        <h2><span>📑</span> Assessment Solutions & Evaluation Guide</h2>
+                        <span class="badge badge-accent">CO4 AT-1 Key</span>
+                    </div>
+
+                    <div class="solution-section">
+                        <h3>Question 1: Interpret the XML Structure (5 Marks)</h3>
+                        <ul class="solution-list">
+                            <li><strong>a. Root Element:</strong> <code>&lt;courses&gt;</code> (The single top-level parent element).</li>
+                            <li><strong>b. Repeating Record Element:</strong> <code>&lt;course&gt;</code> (Repeated for each course entity).</li>
+                            <li><strong>c. Unique Identifier Attribute:</strong> <code>id</code> attribute of <code>&lt;course&gt;</code> (e.g., <code>id="C101"</code>).</li>
+                            <li><strong>d. Numeric Information Elements:</strong> <code>&lt;students&gt;</code> and <code>&lt;credits&gt;</code>.</li>
+                            <li><strong>e. Well-Formedness:</strong> <strong>Yes, the document is well-formed.</strong> It contains a single root element, proper nesting, matching tags, quoted attributes, and an XML declaration.</li>
+                        </ul>
+                    </div>
+
+                    <div class="solution-section">
+                        <h3>Question 4: Data Interpretation Answers (5 Marks)</h3>
+                        <div class="interpretation-grid">
+                            <div class="interp-box">
+                                <span class="interp-lbl">Highest Enrollment Course</span>
+                                <span class="interp-val">Artificial Intelligence (72 Students)</span>
+                            </div>
+                            <div class="interp-box">
+                                <span class="interp-lbl">Lowest Enrollment Course</span>
+                                <span class="interp-val">Web Tech Lab (36 Students)</span>
+                            </div>
+                            <div class="interp-box">
+                                <span class="interp-lbl">Total Theory Courses</span>
+                                <span class="interp-val">4 Courses (C101, C102, C104, C105)</span>
+                            </div>
+                            <div class="interp-box">
+                                <span class="interp-lbl">Courses with 4 Credits</span>
+                                <span class="interp-val">3 Courses (C101, C102, C104)</span>
+                            </div>
+                            <div class="interp-box full-width">
+                                <span class="interp-lbl">Courses Requiring Additional TA Support (&gt; 60 Students)</span>
+                                <span class="interp-val">2 Courses: Artificial Intelligence (72) &amp; Machine Learning (64)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <p>Web Technology Laboratory • Unit IV (CO4 AT-1) • XML, XPath & XSLT Processing Suite</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
